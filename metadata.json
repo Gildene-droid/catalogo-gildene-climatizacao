@@ -1,0 +1,6 @@
+{
+  "name": "Gildene Clima Representações",
+  "description": "E-commerce de climatização com catálogo de ar-condicionado, calculadora de BTUs inteligente, consultoria e checkout seguro.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
