@@ -940,9 +940,9 @@ export default function App() {
         {/* VIEW 3: BRAND SEO DEDICATED PAGE */}
         {currentView === 'brand-seo' && (
           <BrandSEOPage
-            brandSlug={selectedBrandSlug}
-            onOpenProductDetail={handleOpenProductDetail}
-            onBackToCatalog={() => setCurrentView('catalog')}
+            brandId={selectedBrandSlug}
+            onSelectProduct={handleOpenProductDetail}
+            onBackToHome={() => setCurrentView('home')}
           />
         )}
 
