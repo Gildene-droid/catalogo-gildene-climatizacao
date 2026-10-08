@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Calculator, Sun, Cloud, Users, Monitor, ArrowRight, Check } from 'lucide-react';
-import { capacityGuide, estimateBtu, recommendCapacity } from '../btuSizing';
+import { capacityGuide, estimateBtu, recommendByArea } from '../btuSizing';
 
 interface BtuCalculatorProps {
   onRecommend: (calculatedBtu: number) => void;
@@ -13,7 +13,7 @@ export default function BtuCalculator({ onRecommend }: BtuCalculatorProps) {
   const [sunExposure, setSunExposure] = useState<'morning' | 'afternoon'>('afternoon');
 
   const calculatedBtu = estimateBtu(area, people, electronics, sunExposure === 'afternoon');
-  const rec = recommendCapacity(calculatedBtu);
+  const rec = recommendByArea(area);
 
   return (
     <div className="bg-gradient-to-br from-cyan-900 via-blue-900 to-slate-950 text-white rounded-3xl p-6 sm:p-8 shadow-2xl relative overflow-hidden" id="btu-calculator">
@@ -165,7 +165,7 @@ export default function BtuCalculator({ onRecommend }: BtuCalculatorProps) {
           </div>
 
           <div className="my-4 border-t border-white/10 w-full pt-4 space-y-2">
-            <span className="text-xs text-slate-300 block">Recomendamos modelos de:</span>
+            <span className="text-xs text-slate-300 block">Capacidade indicada pela área:</span>
             <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-emerald-500/20 border border-emerald-500/30 text-emerald-400 font-bold rounded-full text-base">
               <Check className="w-4 h-4 text-emerald-400" />
               {rec ? `${rec.btu.toLocaleString('pt-BR')} BTUs` : 'Avaliação personalizada'}
@@ -186,14 +186,14 @@ export default function BtuCalculator({ onRecommend }: BtuCalculatorProps) {
       </div>
       <div className="relative mt-8 border-t border-white/10 pt-6">
         <h4 className="text-lg font-bold">Guia de capacidade por área</h4>
-        <p className="text-sm text-slate-300 mt-2 mb-4">Referência GouveClima. As faixas orientativas abaixo podem diferir do cálculo, que considera as condições informadas do ambiente.</p>
+        <p className="text-sm text-slate-300 mt-2 mb-4">A indicação de capacidade segue as faixas de área da GouveClima.</p>
         <div className="overflow-x-auto rounded-xl border border-white/10">
           <table className="w-full text-sm text-left">
             <thead className="bg-slate-900/60 text-cyan-300"><tr><th scope="col" className="p-3">Capacidade</th><th scope="col" className="p-3">Área de referência</th><th scope="col" className="p-3">Exemplo de aplicação</th></tr></thead>
             <tbody>{capacityGuide.map(row => <tr key={row.btu} className="border-t border-white/10"><th scope="row" className="p-3 whitespace-nowrap">{row.btu.toLocaleString('pt-BR')} BTUs</th><td className="p-3 whitespace-nowrap">{row.area}</td><td className="p-3 text-slate-300">{row.application}</td></tr>)}</tbody>
           </table>
         </div>
-        <p className="text-xs text-slate-300 mt-4 leading-relaxed">Cálculo: área × 750 BTUs/m² em manhã/sombra ou × 800 com sol da tarde, mais 600 BTUs por pessoa além da primeira e por aparelho. A sugestão arredonda para a próxima capacidade disponível, até 60.000 BTUs. Pé-direito, vidros e uso do ambiente também influenciam; confirme a escolha com a GouveClima.</p>
+        <p className="text-xs text-slate-300 mt-4 leading-relaxed">Cálculo: área × 750 BTUs/m² em manhã/sombra ou × 800 com sol da tarde, mais 600 BTUs por pessoa além da primeira e por aparelho. A capacidade indicada segue a tabela de área; a carga estimada considera separadamente sol, pessoas e aparelhos. Pé-direito, vidros e uso do ambiente também influenciam; confirme a escolha com a GouveClima.</p>
       </div>
     </div>
   );
