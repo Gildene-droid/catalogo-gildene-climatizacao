@@ -198,7 +198,7 @@ export default function Footer({ onTabChange, onOpenBrand, onOpenSeoModal }: Foo
             </h4>
             <div className="flex items-center gap-2">
               <a
-                href="https://instagram.com/gildenesolucoesclima"
+                href="https://instagram.com/gildeneclimatizacao"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-8 h-8 rounded-full bg-slate-900 border border-slate-800 hover:border-sky-400 text-pink-400 flex items-center justify-center transition-all hover:scale-110"

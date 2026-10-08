@@ -712,12 +712,12 @@ export default function App() {
                     <div className="bg-white/5 border border-white/10 p-4 rounded-2xl space-y-1">
                       <span className="text-slate-400 font-semibold block">Instagram Oficial</span>
                       <a
-                        href="https://instagram.com/gildenesolucoesclima"
+                        href="https://instagram.com/gildeneclimatizacao"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-pink-400 hover:underline font-black text-sm"
                       >
-                        @gildenesolucoesclima
+                        @gildeneclimatizacao
                       </a>
                     </div>
 
