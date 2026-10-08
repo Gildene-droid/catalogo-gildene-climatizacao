@@ -28,8 +28,8 @@ import { Product, CartItem, FilterState, UpsellItem } from './types';
 import { PRODUCTS, BRANDS_DATA } from './data';
 import { ShoppingBag, ChevronRight, Calculator, Star, SlidersHorizontal, Check, Compass, MessageCircle, Shield, Truck, Award, Users, CheckCircle, Wind, Layers, ArrowRight, Zap, Filter, RotateCcw } from 'lucide-react';
 
-import gildeneSalesHero from './assets/images/gildene_sales_hero_1785196104047.jpg';
-import gildeneSalesOnline from './assets/images/gildene_sales_online_1785196116824.jpg';
+import gildeneSalesHero from './assets/images/gouveclima-showroom.jpg';
+import gildeneSalesOnline from './assets/images/gouveclima-atendimento.jpg';
 
 type AppView = 'home' | 'catalog' | 'detail' | 'brand-seo' | 'buying-guide' | 'btu-calc' | 'checkout' | 'contact' | 'admin';
 
