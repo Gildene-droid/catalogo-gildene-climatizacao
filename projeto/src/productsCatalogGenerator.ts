@@ -241,6 +241,10 @@ export function generateFullCatalog(): Product[] {
     for (const btu of catSpec.btus) {
       for (const brandKey of brandKeys) {
         const brandConfig = BRAND_CONFIGS[brandKey];
+        const series = brandKey === 'Midea' &&
+          (catSpec.category !== 'Split Hi Wall' || btu < 9000 || btu > 22000)
+          ? ''
+          : brandConfig.series;
         
         // Select technology supported by category & brand
         let tech = catSpec.technologies[counter % catSpec.technologies.length];
@@ -269,7 +273,7 @@ export function generateFullCatalog(): Product[] {
         const sku = `GIL-${brandKey.slice(0, 3).toUpperCase()}-${btu}-${counter.toString().padStart(3, '0')}`;
 
         // Construct clear title
-        const name = `Ar Condicionado ${catSpec.category} ${brandConfig.name} ${brandConfig.series} ${tech} ${btu.toLocaleString('pt-BR')} BTUs ${cycle} 220V`;
+        const name = `Ar Condicionado ${catSpec.category} ${brandConfig.name} ${series} ${tech} ${btu.toLocaleString('pt-BR')} BTUs ${cycle} 220V`.replace(/\s+/g, ' ').trim();
 
         // Official image or clean fallback
         const mainImage = brandConfig.officialImg || '';
@@ -290,7 +294,7 @@ export function generateFullCatalog(): Product[] {
           originalPrice,
           image: mainImage,
           gallery,
-          description: `O Ar Condicionado ${catSpec.category} ${brandConfig.name} ${brandConfig.series} de ${btu.toLocaleString('pt-BR')} BTUs é a escolha ideal para quem busca climatização rápida, alta eficiência energética e conforto incomparável para ambientes de ${recommendedArea}. Equipado com tecnologia ${tech} e serpentina anticorrosiva de cobre.`,
+          description: `O Ar Condicionado ${catSpec.category} ${brandConfig.name} ${series} de ${btu.toLocaleString('pt-BR')} BTUs é a escolha ideal para quem busca climatização rápida, alta eficiência energética e conforto incomparável para ambientes de ${recommendedArea}. Equipado com tecnologia ${tech} e serpentina anticorrosiva de cobre.`.replace(/\s+/g, ' ').trim(),
           features: [
             `Tecnologia ${tech} para redução de até 70% no consumo de energia`,
             `Gás Ecológico R-32 de altíssima eficiência térmica`,
