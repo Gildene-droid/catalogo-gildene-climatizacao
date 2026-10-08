@@ -36,40 +36,8 @@ type AppView = 'home' | 'catalog' | 'detail' | 'brand-seo' | 'buying-guide' | 'b
 export default function App() {
   const [currentView, setCurrentView] = useState<AppView>('home');
 
-  // Dynamic Catalog State persisted in localStorage
-  const [productsList, setProductsList] = useState<Product[]>(() => {
-    const saved = localStorage.getItem('gildene_custom_products');
-    if (saved) {
-      try {
-        const parsed = JSON.parse(saved);
-        if (Array.isArray(parsed) && parsed.length > 0) return parsed.map((p: Product) => {
-          const current = PRODUCTS.find(item => item.id === p.id);
-          return current ? {...p, image: current.image, gallery: current.gallery} : p;
-        });
-      } catch (e) {
-        console.error('Error parsing stored products:', e);
-      }
-    }
-    return PRODUCTS;
-  });
-
-  // Dynamic Site Settings persisted in localStorage
-  const [siteSettings, setSiteSettings] = useState<SiteSettings>(() => {
-    const saved = localStorage.getItem('gildene_site_settings');
-    if (saved) {
-      try {
-        const settings = JSON.parse(saved);
-        for (const key of ['heroHighlightText', 'topBarText']) {
-          if (typeof settings[key] === 'string') settings[key] = settings[key]
-            .replaceAll('Gildene Soluções em Climatização', 'GouveClima — Soluções em Climatização')
-            .replaceAll('Gildene Clima', 'GouveClima');
-        }
-        return settings;
-      } catch (e) {
-        console.error('Error parsing stored site settings:', e);
-      }
-    }
-    return {
+  const productsList: Product[] = PRODUCTS;
+  const siteSettings: SiteSettings = {
       heroTitle: 'Soluções completas em climatização',
       heroHighlightText: 'GouveClima — Soluções em Climatização',
       heroSubtitle: 'Conforto térmico ideal para sua casa, empresa ou projeto.',
@@ -78,17 +46,6 @@ export default function App() {
       topBarText: 'Atendimento especializado GouveClima',
       topBarHours: 'Segunda a sexta, das 08h às 18h',
       storeAddress: 'Brasília - DF / Entregas para Todo o Brasil',
-    };
-  });
-
-  const handleSaveProducts = (newProducts: Product[]) => {
-    setProductsList(newProducts);
-    localStorage.setItem('gildene_custom_products', JSON.stringify(newProducts));
-  };
-
-  const handleSaveSiteSettings = (newSettings: SiteSettings) => {
-    setSiteSettings(newSettings);
-    localStorage.setItem('gildene_site_settings', JSON.stringify(newSettings));
   };
 
   // Favorites (Wishlist) state
