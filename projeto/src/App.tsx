@@ -1007,7 +1007,7 @@ export default function App() {
               <span className="text-xs font-black text-sky-600 uppercase tracking-widest block">Dimensionamento Térmico</span>
               <h1 className="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight">Calculadora de BTUs Inteligente</h1>
               <p className="text-slate-500 text-sm font-medium">
-                Insira as medidas do ambiente e descubra a capacidade de refrigeração exata em BTUs para economizar energia sem perder conforto.
+                Informe os dados do ambiente para estimar a capacidade em BTUs e consulte o guia de áreas da GouveClima.
               </p>
             </div>
 

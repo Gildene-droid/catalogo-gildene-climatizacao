@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Calculator, Sun, Cloud, Users, Monitor, ArrowRight, Check } from 'lucide-react';
+import { capacityGuide, estimateBtu, recommendCapacity } from '../btuSizing';
 
 interface BtuCalculatorProps {
   onRecommend: (calculatedBtu: number) => void;
@@ -11,24 +12,8 @@ export default function BtuCalculator({ onRecommend }: BtuCalculatorProps) {
   const [electronics, setElectronics] = useState<number>(1);
   const [sunExposure, setSunExposure] = useState<'morning' | 'afternoon'>('afternoon');
 
-  // Calculates BTU
-  // Base factor is 600 BTU per m² for morning sun, 800 BTU per m² for afternoon sun
-  const factor = sunExposure === 'morning' ? 600 : 800;
-  
-  // BTU = (Area * factor) + (600 * (people - 1, if people > 1)) + (600 * electronics)
-  const peopleFactor = people > 1 ? (people - 1) * factor : 0;
-  const electronicsFactor = electronics * factor;
-  const calculatedBtu = (area * factor) + peopleFactor + electronicsFactor;
-
-  // Find standard model recommendations (9k, 12k, 18k, 24k)
-  const getRecommendedRange = (btu: number) => {
-    if (btu <= 9500) return { btu: 9000, desc: '9.000 BTUs' };
-    if (btu <= 12500) return { btu: 12000, desc: '12.000 BTUs' };
-    if (btu <= 18500) return { btu: 18000, desc: '18.000 BTUs' };
-    return { btu: 24000, desc: '24.000+ BTUs' };
-  };
-
-  const rec = getRecommendedRange(calculatedBtu);
+  const calculatedBtu = estimateBtu(area, people, electronics, sunExposure === 'afternoon');
+  const rec = recommendCapacity(calculatedBtu);
 
   return (
     <div className="bg-gradient-to-br from-cyan-900 via-blue-900 to-slate-950 text-white rounded-3xl p-6 sm:p-8 shadow-2xl relative overflow-hidden" id="btu-calculator">
@@ -48,7 +33,7 @@ export default function BtuCalculator({ onRecommend }: BtuCalculatorProps) {
               Dimensione a potência ideal para o seu ambiente
             </h3>
             <p className="text-slate-300 text-sm mt-1">
-              Insira os dados do seu cômodo e descubra a capacidade de refrigeração ideal em poucos segundos.
+              Estime a capacidade para seu ambiente com base na área, no sol, nas pessoas e nos aparelhos.
             </p>
           </div>
 
@@ -62,6 +47,7 @@ export default function BtuCalculator({ onRecommend }: BtuCalculatorProps) {
               </div>
               <input
                 type="range"
+                aria-label="Área do cômodo em metros quadrados"
                 min="5"
                 max="80"
                 value={area}
@@ -182,19 +168,32 @@ export default function BtuCalculator({ onRecommend }: BtuCalculatorProps) {
             <span className="text-xs text-slate-300 block">Recomendamos modelos de:</span>
             <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-emerald-500/20 border border-emerald-500/30 text-emerald-400 font-bold rounded-full text-base">
               <Check className="w-4 h-4 text-emerald-400" />
-              {rec.desc}
+              {rec ? `${rec.btu.toLocaleString('pt-BR')} BTUs` : 'Avaliação personalizada'}
             </div>
           </div>
 
           <button
             type="button"
-            onClick={() => onRecommend(rec.btu)}
+            onClick={() => rec && onRecommend(rec.btu === 7500 ? 9000 : rec.btu)}
+            disabled={!rec}
             className="w-full py-3.5 px-6 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white text-sm font-bold rounded-xl shadow-lg hover:shadow-cyan-500/20 transition-all duration-150 flex items-center justify-center gap-2 cursor-pointer group mt-auto"
           >
-            Ver Modelos Recomendados
+            {rec ? (rec.btu === 7500 ? 'Ver modelos de 9.000 BTUs no catálogo' : 'Ver Modelos Recomendados') : 'Solicite dimensionamento à GouveClima'}
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </button>
+          {!rec && <a href="https://wa.me/5561981108374" target="_blank" rel="noopener noreferrer" className="mt-3 text-cyan-300 underline text-sm">Falar com a GouveClima sobre este ambiente</a>}
         </div>
+      </div>
+      <div className="relative mt-8 border-t border-white/10 pt-6">
+        <h4 className="text-lg font-bold">Guia de capacidade por área</h4>
+        <p className="text-sm text-slate-300 mt-2 mb-4">Referência GouveClima. As faixas orientativas abaixo podem diferir do cálculo, que considera as condições informadas do ambiente.</p>
+        <div className="overflow-x-auto rounded-xl border border-white/10">
+          <table className="w-full text-sm text-left">
+            <thead className="bg-slate-900/60 text-cyan-300"><tr><th scope="col" className="p-3">Capacidade</th><th scope="col" className="p-3">Área de referência</th><th scope="col" className="p-3">Exemplo de aplicação</th></tr></thead>
+            <tbody>{capacityGuide.map(row => <tr key={row.btu} className="border-t border-white/10"><th scope="row" className="p-3 whitespace-nowrap">{row.btu.toLocaleString('pt-BR')} BTUs</th><td className="p-3 whitespace-nowrap">{row.area}</td><td className="p-3 text-slate-300">{row.application}</td></tr>)}</tbody>
+          </table>
+        </div>
+        <p className="text-xs text-slate-300 mt-4 leading-relaxed">Cálculo: área × 750 BTUs/m² em manhã/sombra ou × 800 com sol da tarde, mais 600 BTUs por pessoa além da primeira e por aparelho. A sugestão arredonda para a próxima capacidade disponível, até 60.000 BTUs. Pé-direito, vidros e uso do ambiente também influenciam; confirme a escolha com a GouveClima.</p>
       </div>
     </div>
   );
