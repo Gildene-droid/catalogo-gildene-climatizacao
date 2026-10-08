@@ -10,15 +10,6 @@ export const capacityGuide = [
   { btu: 60000, area: 'Até 80 m²', application: 'Ambientes comerciais maiores' },
 ];
 
-export function estimateBtu(area: number, people: number, electronics: number, afternoonSun: boolean) {
-  const areaFactor = afternoonSun ? 800 : 750;
-  return area * areaFactor + Math.max(0, people - 1) * 600 + electronics * 600;
-}
-
-export function recommendCapacity(load: number) {
-  return capacityGuide.find(({ btu }) => btu >= load) ?? null;
-}
-
 export function recommendByArea(area: number) {
   const limits = [10, 15, 20, 30, 36, 45, 60, 70, 80];
   const index = limits.findIndex(limit => area <= limit);
