@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://gildene-droid.github.io/catalogo-gildene-climatizacao/sitemap.xml
