@@ -190,7 +190,10 @@ export function applyProductPhoto(product: Product): Product {
   const photo = photos.find(p => p.id === product.id) || photos.find(p =>
     p.series && product.name.toLowerCase().includes(p.series.toLowerCase()) &&
     p.brand === product.brand && p.category === product.category &&
-    p.capacityBTU === product.capacityBTU && p.cycle === product.cycle && p.technology === product.technology);
+    p.capacityBTU === product.capacityBTU && p.cycle === product.cycle && p.technology === product.technology) ||
+    photos.find(p => p.id === 'midea-12k-airvolution' && product.brand === 'Midea' &&
+      product.category === 'Split Hi Wall' && product.name.toLowerCase().includes('airvolution') &&
+      product.technology === 'Inverter');
   const image = photo ? `${import.meta.env.BASE_URL}${photo.image}` : '';
   return {...product, image, gallery: image ? [image] : []};
 }
