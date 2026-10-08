@@ -176,8 +176,8 @@ export default function Footer({ onTabChange, onOpenBrand, onOpenSeoModal }: Foo
               </li>
               <li className="flex items-center gap-2">
                 <Mail className="w-3.5 h-3.5 text-sky-400 shrink-0" />
-                <a href="mailto:contato@gildeneclima.com.br" className="hover:text-sky-400">
-                  contato@gildeneclima.com.br
+                <a href="mailto:gouveiafrio@gmail.com" className="hover:text-sky-400">
+                  gouveiafrio@gmail.com
                 </a>
               </li>
               <li className="pt-1">

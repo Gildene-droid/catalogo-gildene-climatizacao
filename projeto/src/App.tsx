@@ -723,8 +723,8 @@ export default function App() {
 
                     <div className="bg-white/5 border border-white/10 p-4 rounded-2xl space-y-1">
                       <span className="text-slate-400 font-semibold block">E-mail Comercial</span>
-                      <a href="mailto:contato@gildeneclima.com.br" className="text-sky-300 hover:underline font-black text-xs">
-                        contato@gildeneclima.com.br
+                      <a href="mailto:gouveiafrio@gmail.com" className="text-sky-300 hover:underline font-black text-xs">
+                        gouveiafrio@gmail.com
                       </a>
                     </div>
 
