@@ -783,7 +783,22 @@ export const PRODUCTS: Product[] = [
     procelBadge: 'Selo Procel A'
   },
   ...generateFullCatalog()
-].map(applyProductPhoto);
+].map((product: Product) => {
+  if (product.brand === 'LG' && product.category === 'Split Hi Wall') {
+    return applyProductPhoto(product);
+  }
+
+  const removeDual = (text: string) => text.replace(/\bdual\s+/gi, '');
+  return applyProductPhoto({
+    ...product,
+    name: removeDual(product.name),
+    technology: product.technology === 'Dual Inverter' ? 'Inverter' : product.technology,
+    description: removeDual(product.description),
+    features: product.features.map(removeDual),
+    specs: Object.fromEntries(Object.entries(product.specs).map(([key, value]) => [key, removeDual(value)])),
+    ...(product.warranty ? { warranty: removeDual(product.warranty) } : {}),
+  });
+});
 
 export const MOCK_CEPS: { [key: string]: { logradouro: string; bairro: string; cidade: string; uf: string } } = {
   '01311-000': { logradouro: 'Avenida Paulista', bairro: 'Bela Vista', cidade: 'São Paulo', uf: 'SP' },
