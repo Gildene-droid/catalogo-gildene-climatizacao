@@ -52,7 +52,7 @@ export default function Header({
               G
             </div>
             <span className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">
-              Gildene <span className="text-sky-600 font-bold text-base hidden sm:inline">Clima 2.0</span>
+              Gouve<span className="text-sky-600 font-bold text-base hidden sm:inline">Clima</span>
             </span>
           </div>
 
@@ -79,7 +79,7 @@ export default function Header({
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <div className="flex items-center gap-4">
             <span className="flex items-center gap-1.5 font-bold text-slate-200">
-              <span className="text-sky-400">🎧</span> Atendimento especializado Gildene Clima
+              <span className="text-sky-400">🎧</span> Atendimento especializado GouveClima
             </span>
             <span className="text-slate-600">|</span>
             <span className="flex items-center gap-1.5 font-medium text-slate-300">
@@ -126,7 +126,7 @@ export default function Header({
           </div>
           <div>
             <span className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight block leading-none">
-              Gildene<span className="text-sky-600 font-black">Clima</span>
+              Gouve<span className="text-sky-600 font-black">Clima</span>
             </span>
             <span className="text-[10px] font-bold uppercase tracking-widest text-slate-400 block mt-0.5">
               Soluções em Climatização

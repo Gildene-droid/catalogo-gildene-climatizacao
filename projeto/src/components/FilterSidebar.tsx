@@ -359,7 +359,7 @@ export default function FilterSidebar({
 
       {/* Info Box */}
       <div className="bg-sky-50/60 rounded-2xl p-4 border border-sky-100">
-        <span className="text-xs font-black text-sky-700 uppercase block mb-1">Gildene Clima Oficial</span>
+        <span className="text-xs font-black text-sky-700 uppercase block mb-1">GouveClima Oficial</span>
         <p className="text-xs text-slate-600 leading-relaxed font-medium">
           Mais de 200 modelos originais das 14 maiores fabricantes com suporte e consultoria especializada.
         </p>

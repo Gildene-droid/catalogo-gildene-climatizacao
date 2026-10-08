@@ -249,7 +249,7 @@ export default function ProductDetailView({
               <span>Consulte condições comerciais com um de nossos especialistas.</span>
             </div>
             <p className="text-xs text-slate-600 font-medium leading-relaxed">
-              Solicite um orçamento personalizado diretamente com a equipe Gildene Soluções em Climatização. Atendimento B2B e B2C para todo o Brasil.
+              Solicite um orçamento personalizado diretamente com a equipe GouveClima — Soluções em Climatização. Atendimento B2B e B2C para todo o Brasil.
             </p>
 
             {/* Action Buttons */}

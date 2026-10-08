@@ -95,7 +95,7 @@ Observações: ${observacoes || 'Nenhuma'}`;
     const serviceText = selectedServices.length > 0 ? selectedServices.join(', ') : 'Não informado';
 
     return `====================================================
-SOLICITAÇÃO DE ORÇAMENTO - GILDENE SOLUÇÕES EM CLIMATIZAÇÃO
+SOLICITAÇÃO DE ORÇAMENTO - GOUVECLIMA — SOLUÇÕES EM CLIMATIZAÇÃO
 ====================================================
 
 TIPO DE ATENDIMENTO SOLICITADO:
@@ -120,7 +120,7 @@ OBSERVAÇÕES DO CLIENTE:
 ${observacoes || 'Nenhuma observação informada.'}
 
 ====================================================
-Solicitação enviada através do Catálogo Gildene Clima 2.0
+Solicitação enviada através do Catálogo GouveClima
 Data: ${new Date().toLocaleDateString('pt-BR')} às ${new Date().toLocaleTimeString('pt-BR')}
 ====================================================`;
   };
@@ -144,7 +144,7 @@ Data: ${new Date().toLocaleDateString('pt-BR')} às ${new Date().toLocaleTimeStr
     const targetNumber = '5561981108374';
     const waUrl = `https://wa.me/${targetNumber}?text=${encodeURIComponent(waMessage)}`;
 
-    const mailSubject = encodeURIComponent('Solicitação de Orçamento - Site Gildene Soluções em Climatização');
+    const mailSubject = encodeURIComponent('Solicitação de Orçamento - Site GouveClima — Soluções em Climatização');
     const mailUrl = `mailto:gouveiafrio@gmail.com?subject=${mailSubject}&body=${encodeURIComponent(emailMessage)}`;
 
     setGeneratedWhatsAppUrl(waUrl);
@@ -173,7 +173,7 @@ Data: ${new Date().toLocaleDateString('pt-BR')} às ${new Date().toLocaleTimeStr
     const targetNumber = '5561981108374';
     const waUrl = `https://wa.me/${targetNumber}?text=${encodeURIComponent(waMessage)}`;
 
-    const mailSubject = encodeURIComponent('Solicitação de Orçamento - Site Gildene Soluções em Climatização');
+    const mailSubject = encodeURIComponent('Solicitação de Orçamento - Site GouveClima — Soluções em Climatização');
     const mailUrl = `mailto:gouveiafrio@gmail.com?subject=${mailSubject}&body=${encodeURIComponent(emailMessage)}`;
 
     setGeneratedWhatsAppUrl(waUrl);
@@ -198,14 +198,14 @@ Data: ${new Date().toLocaleDateString('pt-BR')} às ${new Date().toLocaleTimeStr
             Recebemos sua solicitação!
           </h2>
           <p className="text-slate-700 max-w-xl mx-auto text-sm sm:text-base font-semibold leading-relaxed bg-sky-50 p-4 rounded-2xl border border-sky-100">
-            Recebemos sua solicitação! Em breve um especialista da Gildene Soluções em Climatização entrará em contato com a melhor condição comercial para sua região.
+            Recebemos sua solicitação! Em breve um especialista da GouveClima — Soluções em Climatização entrará em contato com a melhor condição comercial para sua região.
           </p>
         </div>
 
         {/* Resumo da mensagem */}
         <div className="bg-slate-50 border border-slate-200/80 rounded-3xl p-6 text-left space-y-4 max-w-xl mx-auto text-xs text-slate-700 shadow-sm">
           <div className="flex items-center justify-between border-b border-slate-200 pb-3">
-            <span className="font-extrabold text-slate-900 uppercase font-mono">Gildene Soluções em Climatização</span>
+            <span className="font-extrabold text-slate-900 uppercase font-mono">GouveClima — Soluções em Climatização</span>
             <span className="text-[10px] text-sky-700 bg-sky-50 px-2.5 py-0.5 rounded-full font-bold">WhatsApp: +55 61 98110-8374</span>
           </div>
 

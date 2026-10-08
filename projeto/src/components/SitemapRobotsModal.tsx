@@ -14,7 +14,7 @@ export const SitemapRobotsModal: React.FC<SitemapRobotsModalProps> = ({ isOpen, 
   if (!isOpen) return null;
 
   // Generate dynamic sitemap.xml
-  const baseUrl = 'https://gildeneclima.com.br';
+  const baseUrl = 'https://gildene-droid.github.io/catalogo-gildene-climatizacao';
   const today = new Date().toISOString().split('T')[0];
 
   const brandUrls = Object.keys(BRANDS_DATA).map(
@@ -69,7 +69,7 @@ Sitemap: ${baseUrl}/sitemap.xml`;
   const schemaJson = `{
   "@context": "https://schema.org",
   "@type": "HVACBusiness",
-  "name": "Gildene Clima",
+  "name": "GouveClima",
   "description": "Loja especializada em ar condicionado Inverter, Split, Cassete e VRF.",
   "url": "${baseUrl}",
   "telephone": "+55-61-99999-9999",
@@ -118,7 +118,7 @@ Sitemap: ${baseUrl}/sitemap.xml`;
               <Globe className="w-5 h-5" />
             </div>
             <div>
-              <h3 className="font-extrabold text-lg text-white">Indexação & SEO Index (Gildene Clima v2.0)</h3>
+              <h3 className="font-extrabold text-lg text-white">Indexação & SEO Index (GouveClima v2.0)</h3>
               <p className="text-xs text-slate-400">Arquivos válidos de sitemap.xml, robots.txt e Schema.org JSON-LD</p>
             </div>
           </div>

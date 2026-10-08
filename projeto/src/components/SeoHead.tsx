@@ -10,7 +10,7 @@ interface SeoHeadProps {
 }
 
 export const SeoHead: React.FC<SeoHeadProps> = ({
-  title = 'Gildene Clima | Ar Condicionado, Climatização e Soluções Inverter',
+  title = 'GouveClima | Ar Condicionado, Climatização e Soluções Inverter',
   description = 'Especialista em vendas e soluções de ar condicionado Inverter, Split Hi Wall, Cassete, Piso Teto e VRF. As melhores marcas com preços de fábrica e atendimento via WhatsApp.',
   product,
   pageType = 'home',
@@ -20,13 +20,13 @@ export const SeoHead: React.FC<SeoHeadProps> = ({
     // Dynamic document title update
     let dynamicTitle = title;
     if (pageType === 'detail' && product) {
-      dynamicTitle = `${product.name} | Gildene Clima`;
+      dynamicTitle = `${product.name} | GouveClima`;
     } else if (pageType === 'brand' && brandName) {
-      dynamicTitle = `Ar Condicionado ${brandName} Inverter - Catálogo e Preços | Gildene Clima`;
+      dynamicTitle = `Ar Condicionado ${brandName} Inverter - Catálogo e Preços | GouveClima`;
     } else if (pageType === 'guide') {
-      dynamicTitle = 'Guia Definitivo de Compra de Ar Condicionado 2026 | Gildene Clima';
+      dynamicTitle = 'Guia Definitivo de Compra de Ar Condicionado 2026 | GouveClima';
     } else if (pageType === 'calc') {
-      dynamicTitle = 'Calculadora de BTUs Grátis para Ar Condicionado | Gildene Clima';
+      dynamicTitle = 'Calculadora de BTUs Grátis para Ar Condicionado | GouveClima';
     }
 
     document.title = dynamicTitle;
@@ -45,10 +45,9 @@ export const SeoHead: React.FC<SeoHeadProps> = ({
   const organizationSchema = {
     '@context': 'https://schema.org',
     '@type': 'HVACBusiness',
-    'name': 'Gildene Clima',
-    'alternateName': 'Gildene Clima Ar Condicionado',
-    'url': 'https://gildeneclima.com.br',
-    'logo': 'https://gildeneclima.com.br/logo.png',
+    'name': 'GouveClima',
+    'alternateName': 'GouveClima Ar Condicionado',
+    'url': 'https://gildene-droid.github.io/catalogo-gildene-climatizacao/',
     'telephone': '+55-61-99999-9999',
     'priceRange': '$$$',
     'address': {
@@ -88,7 +87,7 @@ export const SeoHead: React.FC<SeoHeadProps> = ({
           'availability': 'https://schema.org/InStock',
           'seller': {
             '@type': 'Organization',
-            'name': 'Gildene Clima'
+            'name': 'GouveClima'
           }
         },
         'aggregateRating': {

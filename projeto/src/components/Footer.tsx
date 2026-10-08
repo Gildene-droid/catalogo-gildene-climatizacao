@@ -289,7 +289,7 @@ export default function Footer({ onTabChange, onOpenBrand, onOpenSeoModal }: Foo
 
         {/* Copyright */}
         <div className="border-t border-slate-900 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-[11px] text-slate-500 font-medium">
-          <p>© 2026 Gildene Soluções em Climatização. Todos os direitos reservados. CNPJ / DF.</p>
+          <p>© 2026 GouveClima — Soluções em Climatização. Todos os direitos reservados. CNPJ / DF.</p>
           
         </div>
 

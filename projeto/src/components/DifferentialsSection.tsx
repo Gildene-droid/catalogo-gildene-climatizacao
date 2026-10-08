@@ -49,7 +49,7 @@ export default function DifferentialsSection() {
       <div className="relative z-10 space-y-8 max-w-6xl mx-auto">
         <div className="text-center space-y-2 max-w-2xl mx-auto">
           <span className="text-sky-400 font-mono font-bold text-xs uppercase tracking-widest bg-sky-950/80 border border-sky-800/80 px-3.5 py-1 rounded-full">
-            Gildene Soluções em Climatização
+            GouveClima — Soluções em Climatização
           </span>
           <h2 className="text-2xl sm:text-3xl font-black text-white tracking-tight">
             Por que cotar seu projeto conosco?

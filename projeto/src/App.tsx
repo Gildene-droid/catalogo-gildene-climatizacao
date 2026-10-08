@@ -58,18 +58,24 @@ export default function App() {
     const saved = localStorage.getItem('gildene_site_settings');
     if (saved) {
       try {
-        return JSON.parse(saved);
+        const settings = JSON.parse(saved);
+        for (const key of ['heroHighlightText', 'topBarText']) {
+          if (typeof settings[key] === 'string') settings[key] = settings[key]
+            .replaceAll('Gildene Soluções em Climatização', 'GouveClima — Soluções em Climatização')
+            .replaceAll('Gildene Clima', 'GouveClima');
+        }
+        return settings;
       } catch (e) {
         console.error('Error parsing stored site settings:', e);
       }
     }
     return {
       heroTitle: 'Soluções completas em climatização',
-      heroHighlightText: 'Gildene Soluções em Climatização',
+      heroHighlightText: 'GouveClima — Soluções em Climatização',
       heroSubtitle: 'Conforto térmico ideal para sua casa, empresa ou projeto.',
       whatsappNumber: '(61) 98110-8374',
       whatsappLink: 'https://wa.me/message/MIJAF4C4WX2EN1',
-      topBarText: 'Atendimento especializado Gildene Clima',
+      topBarText: 'Atendimento especializado GouveClima',
       topBarHours: 'Segunda a sexta, das 08h às 18h',
       storeAddress: 'Brasília - DF / Entregas para Todo o Brasil',
     };
@@ -626,7 +632,7 @@ export default function App() {
             <section className="bg-slate-900 text-white py-20 relative overflow-hidden" id="vantagens-section">
               <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12 relative z-10">
                 <div className="text-center space-y-2 max-w-2xl mx-auto">
-                  <span className="text-xs font-black text-sky-400 uppercase tracking-widest block">Diferenciais Gildene Clima</span>
+                  <span className="text-xs font-black text-sky-400 uppercase tracking-widest block">Diferenciais GouveClima</span>
                   <h2 className="text-3xl sm:text-4xl font-black tracking-tight text-white">Por que comprar conosco?</h2>
                   <p className="text-slate-400 text-sm font-medium">Oferecemos atendimento integral do projeto à entrega garantida do equipamento.</p>
                 </div>
@@ -754,7 +760,7 @@ export default function App() {
                 </div>
                 <h2 className="text-3xl font-black text-slate-900 tracking-tight">Quem Somos</h2>
                 <p className="text-slate-600 text-sm leading-relaxed max-w-3xl mx-auto font-medium">
-                  A <strong>Gildene Soluções em Climatização</strong> é revendedora e representante autorizada das marcas mais respeitadas no mercado global de ar-condicionado. Atendemos clientes residenciais, comerciais e corporativos em Brasília e todo o Entorno com foco em tecnologia Inverter, Selo Procel A e economia energética superior.
+                  A <strong>GouveClima — Soluções em Climatização</strong> é revendedora e representante autorizada das marcas mais respeitadas no mercado global de ar-condicionado. Atendemos clientes residenciais, comerciais e corporativos em Brasília e todo o Entorno com foco em tecnologia Inverter, Selo Procel A e economia energética superior.
                 </p>
               </div>
             </section>
@@ -772,7 +778,7 @@ export default function App() {
                 
                 <div className="md:col-span-8 space-y-4">
                   <div className="inline-block px-3 py-1 bg-sky-500/20 border border-sky-400/30 rounded-lg text-sky-300 text-xs font-bold uppercase tracking-wider">
-                    Catálogo Oficial Gildene Clima
+                    Catálogo Oficial GouveClima
                   </div>
                   
                   <h1 className="text-3xl sm:text-4xl font-black text-white tracking-tight leading-tight">
@@ -816,7 +822,7 @@ export default function App() {
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent" />
                     <div className="absolute bottom-2 left-2 right-2 text-center bg-slate-900/80 backdrop-blur-sm p-1.5 rounded-lg border border-white/10">
-                      <span className="text-[10px] font-black text-sky-300 uppercase tracking-wider block">Atendimento Gildene</span>
+                      <span className="text-[10px] font-black text-sky-300 uppercase tracking-wider block">Atendimento GouveClima</span>
                     </div>
                   </div>
                 </div>
@@ -1077,7 +1083,7 @@ export default function App() {
               </div>
               <h3 className="text-xl font-extrabold text-slate-900 tracking-tight">Falar com Consultor Especializado</h3>
               <p className="text-xs text-slate-500 leading-normal max-w-xs mx-auto font-medium">
-                Insira seu contato abaixo. Um consultor de Gildene Clima entrará em contato via WhatsApp.
+                Insira seu contato abaixo. Um consultor de GouveClima entrará em contato via WhatsApp.
               </p>
             </div>
 
