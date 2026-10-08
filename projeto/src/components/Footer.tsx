@@ -238,10 +238,10 @@ export default function Footer({ onTabChange, onOpenBrand, onOpenSeoModal }: Foo
             <div className="bg-slate-900/80 border border-slate-800 rounded-2xl p-3.5 space-y-1.5">
               <div className="flex items-center gap-2 text-sky-400">
                 <Lock className="w-4 h-4" />
-                <strong className="text-white text-xs font-bold">Site 100% Seguro</strong>
+                <strong className="text-white text-xs font-bold">Conexão HTTPS</strong>
               </div>
               <p className="text-[10px] text-slate-400 font-medium leading-relaxed">
-                Sua navegação e dados sempre protegidos com criptografia SSL de 256 bits.
+                A conexão com este site é criptografada por HTTPS.
               </p>
             </div>
           </div>
@@ -274,10 +274,10 @@ export default function Footer({ onTabChange, onOpenBrand, onOpenSeoModal }: Foo
             </span>
             <div className="flex flex-wrap gap-2 items-center md:justify-end">
               <span className="bg-emerald-950 text-emerald-400 border border-emerald-800 px-3 py-1 rounded-lg text-[10px] font-extrabold flex items-center gap-1">
-                <Lock className="w-3 h-3" /> SSL CERTIFICADO
+                <Lock className="w-3 h-3" /> HTTPS
               </span>
               <span className="bg-sky-950 text-sky-400 border border-sky-800 px-3 py-1 rounded-lg text-[10px] font-extrabold flex items-center gap-1">
-                <ShieldCheck className="w-3 h-3" /> SITE SEGURO GOOGLE
+                <ShieldCheck className="w-3 h-3" /> CONEXÃO CRIPTOGRAFADA
               </span>
               <span className="bg-slate-900 text-slate-300 border border-slate-700 px-3 py-1 rounded-lg text-[10px] font-extrabold">
                 100% PRODUTOS ORIGINAIS
