@@ -2,6 +2,11 @@ import { Product } from './types';
 
 // Product photos retrieved from Leveros and CentralAr. Match by model line and variant.
 const photos = [
+  { id: 'gree-cassete-36k', brand: 'Gree', series: 'G-Prime', capacityBTU: 36000,
+    cycle: 'Frio', technology: 'Inverter', category: 'Cassete',
+    image: 'fotos/gree-cassete-36k.webp',
+    page: 'https://gree.com.br/produto/g-prime-inverter-plus-cassete/',
+    sourceTitle: 'G-Prime Inverter Plus Cassete 24k/36k — foto de referência' },
   {
     "id": "midea-9k-airvolution",
     "page": "https://www.leveros.com.br/ar-condicionado-split-hw-inverter-midea-ai-airvolution-9-000-btus-r-32-so-frio-220v",
