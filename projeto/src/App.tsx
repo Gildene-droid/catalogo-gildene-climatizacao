@@ -443,7 +443,10 @@ export default function App() {
                   {/* Main Headline */}
                   <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-slate-900 tracking-tight leading-[1.1]">
                     {siteSettings.heroTitle} <br className="hidden sm:inline" />
-                    <span className="text-sky-600">{siteSettings.heroHighlightText}</span>
+                    <span className="block text-center text-sky-600 mt-3">
+                      <span className="block text-3xl sm:text-4xl">GouveClima</span>
+                      <span className="block text-xl sm:text-2xl mt-1">Soluções em Climatização</span>
+                    </span>
                   </h1>
                   
                   {/* Subtitle */}
