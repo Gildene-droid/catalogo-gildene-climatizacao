@@ -388,7 +388,7 @@ export default function App() {
                 width={2032}
                 height={774}
                 fetchPriority="high"
-                className="block w-[88%] max-w-6xl mx-auto h-auto"
+                className="block w-full h-[33.5vw] max-h-[440px] object-cover object-center"
               />
               <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 w-full">
                 <div className="space-y-6">
