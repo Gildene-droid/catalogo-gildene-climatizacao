@@ -29,6 +29,7 @@ import { PRODUCTS, BRANDS_DATA } from './data';
 import { ShoppingBag, ChevronRight, Calculator, Star, SlidersHorizontal, Check, Compass, MessageCircle, Shield, Truck, Award, Users, CheckCircle, Wind, Layers, ArrowRight, Zap, Filter, RotateCcw } from 'lucide-react';
 
 import gildeneSalesHero from './assets/images/gouveclima-showroom.jpg';
+import gouveClimaCover from './assets/images/gouveclima-cover.webp';
 import gildeneSalesOnline from './assets/images/gouveclima-atendimento.jpg';
 
 type AppView = 'home' | 'catalog' | 'detail' | 'brand-seo' | 'buying-guide' | 'btu-calc' | 'checkout' | 'contact' | 'admin';
@@ -379,30 +380,18 @@ export default function App() {
           <div className="space-y-16 pb-20 animate-fade-in" id="home-view">
             
             {/* 1. HERO BANNER SECTION (Full Background Image with Gildene Consultant) */}
-            <section className="relative overflow-hidden bg-slate-100 min-h-[480px] sm:min-h-[540px] flex items-center border-b border-slate-200">
-              
-              {/* Full Background Image */}
-              <div className="absolute inset-0 z-0">
-                <img
-                  src={gildeneSalesHero}
-                  alt="Vendedora Gildene em atendimento com cliente"
-                  referrerPolicy="no-referrer"
-                  className="w-full h-full object-cover object-right sm:object-center"
-                />
-                {/* Gradient overlay for text readability (left to right) */}
-                <div className="absolute inset-0 bg-gradient-to-r from-white via-white/95 sm:via-white/80 to-transparent z-10" />
-              </div>
-
-              {/* Content Container */}
-              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20 py-10 sm:py-16 w-full">
-                <div className="max-w-xl lg:max-w-2xl space-y-6">
-                  
-                  {/* Main Headline */}
-                  <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-slate-900 tracking-tight leading-[1.1]">
-                    <span className="block text-sky-600">GouveClima</span>
-                    <span className="block text-2xl sm:text-3xl mt-3">Soluções completas em Climatização</span>
-                  </h1>
-                  
+            <section className="overflow-hidden bg-slate-50 border-b border-slate-200">
+              <h1 className="sr-only">GouveClima — Soluções em Climatização</h1>
+              <img
+                src={gouveClimaCover}
+                alt="GouveClima — Soluções em Climatização: atendimento e equipamentos no showroom"
+                width={2032}
+                height={774}
+                fetchPriority="high"
+                className="block w-full h-auto"
+              />
+              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 w-full">
+                <div className="space-y-6">
                   {/* Subtitle */}
                   <p className="text-slate-700 text-base sm:text-xl font-medium leading-relaxed max-w-lg">
                     {siteSettings.heroSubtitle}
