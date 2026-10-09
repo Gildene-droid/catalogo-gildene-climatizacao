@@ -191,7 +191,7 @@ export default function ProductDetailView({
             <div className="bg-slate-50 border border-slate-100 rounded-2xl p-3 text-center">
               <ShieldCheck className="w-4 h-4 text-emerald-500 mx-auto mb-1" />
               <span className="text-[10px] text-slate-400 font-bold uppercase block">Garantia</span>
-              <span className="text-xs font-black text-slate-800">{product.warranty || 'Até 10 Anos'}</span>
+              <span className="text-xs font-black text-slate-800">{product.warranty || '1 ano de garantia'}</span>
             </div>
             <div className="bg-slate-50 border border-slate-100 rounded-2xl p-3 text-center">
               <Truck className="w-4 h-4 text-sky-500 mx-auto mb-1" />
@@ -201,7 +201,7 @@ export default function ProductDetailView({
             <div className="bg-slate-50 border border-slate-100 rounded-2xl p-3 text-center">
               <Award className="w-4 h-4 text-purple-500 mx-auto mb-1" />
               <span className="text-[10px] text-slate-400 font-bold uppercase block">Recomendado</span>
-              <span className="text-xs font-black text-slate-800">{product.recommendedArea || 'Até 20 m²'}</span>
+              <span className="text-xs font-black text-slate-800">{product.recommendedArea || 'Dimensionamento sob consulta'}</span>
             </div>
           </div>
         </div>

@@ -15,3 +15,9 @@ export function recommendByArea(area: number) {
   const index = limits.findIndex(limit => area <= limit);
   return index < 0 ? null : capacityGuide[index];
 }
+
+export function getRecommendedArea(btu: number): string {
+  const limits = [10, 15, 20, 30, 36, 45, 60, 70, 80];
+  const index = capacityGuide.findIndex(entry => btu <= entry.btu);
+  return index < 0 ? 'Dimensionamento sob consulta' : `Até ${limits[index]} m²`;
+}

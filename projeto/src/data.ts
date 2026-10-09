@@ -1,3 +1,4 @@
+import { getRecommendedArea } from './btuSizing';
 import { Product, UpsellItem, BrandInfo } from './types';
 import { generateFullCatalog } from './productsCatalogGenerator';
 import { applyProductPhoto } from './productPhotos';
@@ -45,7 +46,7 @@ export const BRANDS_DATA: Record<string, BrandInfo> = {
       'Gás ecológico R-32 com menor impacto ambiental',
       'Até 70% de economia de energia com Selo Procel A'
     ],
-    warrantyInfo: 'Até 2 anos de garantia do fabricante no produto e 10 anos no compressor Inverter.',
+    warrantyInfo: '1 ano de garantia.',
     seoKeywords: ['Ar Condicionado Midea', 'Midea AirVolution', 'Split Inverter Midea 12000', 'Midea 9000 BTUs']
   },
   lg: {
@@ -54,12 +55,12 @@ export const BRANDS_DATA: Record<string, BrandInfo> = {
     tagline: 'Tecnologia Dual Inverter Voice com Inteligência Artificial ThinQ',
     description: 'A LG revoluciona a climatização residencial com compressores Dual Inverter de duplo rotor, garantindo resfriamento até 40% mais rápido, ultra-silêncio (19 dB) e controle por comando de voz via Alexa e Google Assistente.',
     highlights: [
-      'Compressor Dual Inverter com 10 anos de garantia',
+      'Compressor Dual Inverter com 1 ano de garantia',
       'Controle Wi-Fi integrado com aplicativo LG ThinQ e comando de voz',
       'Consumo energético reduzido em até 70%',
       'Proteção contra picos de tensão e corrosão com GoldFin'
     ],
-    warrantyInfo: '10 anos de garantia no compressor Dual Inverter e 1 ano no aparelho.',
+    warrantyInfo: '1 ano de garantia.',
     seoKeywords: ['LG Dual Inverter', 'Ar Condicionado LG ThinQ', 'LG Voice 12000', 'LG Dual Inverter 18000 BTUs']
   },
   samsung: {
@@ -73,7 +74,7 @@ export const BRANDS_DATA: Record<string, BrandInfo> = {
       'Conectividade Wi-Fi e controle por ecossistema SmartThings',
       'Filtro Antibacteriano lavável com proteção contra alérgenos'
     ],
-    warrantyInfo: '10 anos de garantia no compressor Digital Inverter.',
+    warrantyInfo: '1 ano de garantia.',
     seoKeywords: ['Samsung WindFree', 'Ar Condicionado Samsung Inverter', 'Samsung WindFree 12000 BTUs']
   },
   gree: {
@@ -87,7 +88,7 @@ export const BRANDS_DATA: Record<string, BrandInfo> = {
       'Tecnologia G-Classic Inverter com rápido resfriamento',
       'Selo Procel Ouro com eficiência topo de linha'
     ],
-    warrantyInfo: 'Até 5 anos de garantia total ao instalar com a rede autorizada Gree.',
+    warrantyInfo: '1 ano de garantia.',
     seoKeywords: ['Gree Inverter', 'Ar Condicionado Gree 9000', 'Gree G-Classic', 'Gree 12000 BTUs']
   },
   daikin: {
@@ -101,7 +102,7 @@ export const BRANDS_DATA: Record<string, BrandInfo> = {
       'Silêncio extremo para noites de sono perfeitas',
       'Pioneira global em soluções VRF e Inverter Premium'
     ],
-    warrantyInfo: '2 anos no produto e 10 anos no compressor Daikin.',
+    warrantyInfo: '1 ano de garantia.',
     seoKeywords: ['Daikin Inverter', 'Ar Condicionado Daikin R32', 'Daikin VRF', 'Daikin 12000 BTUs']
   },
   fujitsu: {
@@ -115,7 +116,7 @@ export const BRANDS_DATA: Record<string, BrandInfo> = {
       'Múltiplos filtros com íons de prata e maçã catequina',
       'Ideal para projetos arquitetônicos exigentes'
     ],
-    warrantyInfo: 'Até 5 anos de garantia com instaladores credenciados.',
+    warrantyInfo: '1 ano de garantia.',
     seoKeywords: ['Fujitsu Inverter', 'Fujitsu Airstage', 'Ar Condicionado Fujitsu 12000', 'Multi Split Fujitsu']
   },
   elgin: {
@@ -129,7 +130,7 @@ export const BRANDS_DATA: Record<string, BrandInfo> = {
       'Classificação A do Inmetro com baixíssimo consumo elétrico',
       'Linha completa de Split, Piso Teto e Cassete'
     ],
-    warrantyInfo: '3 anos de garantia ao contratar instalador credenciado Elgin.',
+    warrantyInfo: '1 ano de garantia.',
     seoKeywords: ['Elgin Eco Dream', 'Ar Condicionado Elgin Inverter', 'Elgin Piso Teto', 'Elgin Cassete']
   },
   hitachi: {
@@ -143,7 +144,7 @@ export const BRANDS_DATA: Record<string, BrandInfo> = {
       'Tecnologia Inverter de controle vetorial senoidal',
       'Opções de alta capacidade térmica acima de 36.000 BTUs'
     ],
-    warrantyInfo: '2 anos de garantia no equipamento.',
+    warrantyInfo: '1 ano de garantia.',
     seoKeywords: ['Hitachi VRF', 'Hitachi Cassete', 'Ar Condicionado Hitachi', 'Hitachi Piso Teto']
   },
   hisense: {
@@ -157,7 +158,7 @@ export const BRANDS_DATA: Record<string, BrandInfo> = {
       'Conexão Wi-Fi com app ConnectLife e inteligência artificial',
       'Design slim ultrassutil'
     ],
-    warrantyInfo: '2 anos no produto e 10 anos no compressor.',
+    warrantyInfo: '1 ano de garantia.',
     seoKeywords: ['Hisense Inverter', 'Ar Condicionado Hisense Wi-Fi', 'Hisense 12000 BTUs']
   },
   tcl: {
@@ -171,7 +172,7 @@ export const BRANDS_DATA: Record<string, BrandInfo> = {
       'Conectividade via Google Assistente e aplicativo TCL Home',
       'Excelente valor de investimento e manutenção simples'
     ],
-    warrantyInfo: '2 anos de garantia total e 10 anos no compressor.',
+    warrantyInfo: '1 ano de garantia.',
     seoKeywords: ['TCL Inverter', 'Ar Condicionado TCL 12000', 'TCL Gentle Breeze', 'TCL 9000 BTUs']
   },
   agratto: {
@@ -185,7 +186,7 @@ export const BRANDS_DATA: Record<string, BrandInfo> = {
       'Classificação energética A para economia real na conta de luz',
       'Manutenção facilitada e peças de reposição abundantes no Brasil'
     ],
-    warrantyInfo: '1 ano de garantia total do fabricante.',
+    warrantyInfo: '1 ano de garantia.',
     seoKeywords: ['Agratto Zen Inverter', 'Ar Condicionado Agratto 9000', 'Agratto 12000 BTUs']
   },
   'springer-carrier': {
@@ -199,7 +200,7 @@ export const BRANDS_DATA: Record<string, BrandInfo> = {
       'Serpentina em cobre anticorrosiva',
       'Selo Procel A do Inmetro'
     ],
-    warrantyInfo: '2 anos de garantia total ao contratar instalador credenciado.',
+    warrantyInfo: '1 ano de garantia.',
     seoKeywords: ['Springer Carrier Inverter', 'Springer Xtreme Save', 'Ar Condicionado Springer Carrier']
   },
   carrier: {
@@ -213,7 +214,7 @@ export const BRANDS_DATA: Record<string, BrandInfo> = {
       'Filtros de purificação avançada com ionização',
       'Baixíssimo ruído e resistência a maresia'
     ],
-    warrantyInfo: '2 anos de garantia total e suporte de rede credenciada.',
+    warrantyInfo: '1 ano de garantia.',
     seoKeywords: ['Carrier Inverter', 'Ar Condicionado Carrier', 'Carrier VRF', 'Carrier Cassete']
   },
   philco: {
@@ -227,7 +228,7 @@ export const BRANDS_DATA: Record<string, BrandInfo> = {
       'Modo Turbo e controle via app smartphone',
       'Preço acessível com excelente acabamento'
     ],
-    warrantyInfo: '1 ano de garantia no produto e 10 anos no compressor Inverter.',
+    warrantyInfo: '1 ano de garantia.',
     seoKeywords: ['Philco Inverter', 'Ar Condicionado Philco 12000', 'Philco Eco Inverter']
   },
   electrolux: {
@@ -241,7 +242,7 @@ export const BRANDS_DATA: Record<string, BrandInfo> = {
       'Função Eco e Auto-limpeza integrada',
       'Design clean e display invisível na evaporadora'
     ],
-    warrantyInfo: '1 ano de garantia total e 10 anos no compressor Inverter.',
+    warrantyInfo: '1 ano de garantia.',
     seoKeywords: ['Electrolux Inverter', 'Ar Condicionado Electrolux Color', 'Electrolux 12000 BTUs']
   }
 };
@@ -272,7 +273,7 @@ export const PRODUCTS: Product[] = [
       'Tecnologia': 'Inverter',
       'Classificação Energética': 'A',
       'Gás Refrigerante': 'R-32',
-      'Garantia': '2 anos'
+      'Garantia': '1 ano de garantia'
     },
     rating: 4.8,
     reviewsCount: 35,
@@ -303,7 +304,7 @@ export const PRODUCTS: Product[] = [
       'Tecnologia': 'Inverter',
       'Classificação Energética': 'A',
       'Gás Refrigerante': 'R-32',
-      'Garantia': '2 anos'
+      'Garantia': '1 ano de garantia'
     },
     rating: 4.9,
     reviewsCount: 42,
@@ -351,7 +352,7 @@ export const PRODUCTS: Product[] = [
     originalPrice: 3099.00,
     image: 'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=600&q=80',
     gallery: ['https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=600&q=80'],
-    description: 'Comandado por voz através do app ThinQ. Compressor Dual Inverter com 10 anos de garantia e até 70% de economia de energia, mantendo estabilidade total de temperatura.',
+    description: 'Comandado por voz através do app ThinQ. Compressor Dual Inverter com 1 ano de garantia e até 70% de economia de energia, mantendo estabilidade total de temperatura.',
     features: [
       'Conexão Wi-Fi com comando de voz Alexa e Google',
       'Compressor Dual Inverter com maior estabilidade',
@@ -363,7 +364,7 @@ export const PRODUCTS: Product[] = [
       'Ciclo': 'Frio',
       'Tecnologia': 'Dual Inverter',
       'Classificação Energética': 'A (Selo Ouro)',
-      'Garantia': '10 anos (Compressor)'
+      'Garantia': '1 ano de garantia'
     },
     rating: 4.9,
     reviewsCount: 56,
@@ -422,7 +423,7 @@ export const PRODUCTS: Product[] = [
       'Ciclo': 'Frio',
       'Tecnologia': 'Inverter',
       'Classificação Energética': 'A',
-      'Garantia': '10 anos no compressor'
+      'Garantia': '1 ano de garantia'
     },
     rating: 4.8,
     reviewsCount: 31,
@@ -510,7 +511,7 @@ export const PRODUCTS: Product[] = [
       'Capacidade de Refrigeração': '12.000 BTU/h',
       'Ciclo': 'Frio',
       'Tecnologia': 'Inverter Premium',
-      'Garantia': '10 anos no compressor'
+      'Garantia': '1 ano de garantia'
     },
     rating: 5.0,
     reviewsCount: 47,
@@ -569,7 +570,7 @@ export const PRODUCTS: Product[] = [
       'Ciclo': 'Frio',
       'Tecnologia': 'Inverter',
       'Classificação Energética': 'A',
-      'Garantia': '3 anos total'
+      'Garantia': '1 ano de garantia'
     },
     rating: 4.6,
     reviewsCount: 19,
@@ -656,7 +657,7 @@ export const PRODUCTS: Product[] = [
       'Capacidade de Refrigeração': '12.000 BTU/h',
       'Ciclo': 'Frio',
       'Tecnologia': 'Inverter',
-      'Garantia': '10 anos no compressor'
+      'Garantia': '1 ano de garantia'
     },
     rating: 4.7,
     reviewsCount: 18,
@@ -747,7 +748,7 @@ export const PRODUCTS: Product[] = [
       'Tecnologia': 'Inverter',
       'Classificação Energética': 'A (Inmetro)',
       'Gás Refrigerante': 'R-32',
-      'Garantia': '10 anos (Compressor)'
+      'Garantia': '1 ano de garantia'
     },
     rating: 4.8,
     reviewsCount: 48,
@@ -784,6 +785,18 @@ export const PRODUCTS: Product[] = [
   },
   ...generateFullCatalog()
 ].map((product: Product) => {
+  const area = getRecommendedArea(product.capacityBTU);
+  product = {
+    ...product,
+    warranty: '1 ano de garantia',
+    recommendedArea: area,
+    description: product.description.replace(/até\s+\d+\s*m[²2]/gi, area),
+    features: product.features.map(text => text.replace(/até\s+\d+\s*m[²2]/gi, area)),
+    specs: Object.fromEntries(Object.entries(product.specs).map(([key, value]) => [key,
+      /garantia/i.test(key) ? '1 ano de garantia' : /área|area/i.test(key) ? area : value
+    ])),
+  };
+
   if (product.brand === 'LG' && product.category === 'Split Hi Wall') {
     return applyProductPhoto(product);
   }

@@ -160,11 +160,11 @@ export default function ProductCompareModal({
                     </div>
 
                     <div className="h-10 flex items-center justify-center border-b border-slate-200/60 font-semibold text-slate-700">
-                      {prod.recommendedArea || 'Até 20 m²'}
+                      {prod.recommendedArea || 'Dimensionamento sob consulta'}
                     </div>
 
                     <div className="h-10 flex items-center justify-center border-b border-slate-200/60 font-semibold text-slate-600">
-                      {prod.warranty || '2 anos'}
+                      {prod.warranty || '1 ano de garantia'}
                     </div>
 
                     <div className="h-12 flex flex-col items-center justify-center border-b border-slate-200/60">

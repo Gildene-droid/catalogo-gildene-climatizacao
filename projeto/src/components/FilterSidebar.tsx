@@ -338,7 +338,7 @@ export default function FilterSidebar({
           Área de Aplicação
         </h4>
         <div className="grid grid-cols-2 gap-1.5">
-          {['Até 15 m²', 'Até 20 m²', 'Até 30 m²', 'Até 40 m²', 'Até 60 m²'].map((area) => {
+          {['Até 10 m²', 'Até 15 m²', 'Até 20 m²', 'Até 30 m²', 'Até 36 m²', 'Até 45 m²', 'Até 60 m²', 'Até 70 m²', 'Até 80 m²'].map((area) => {
             const isSelected = filters.areaRange === area;
             return (
               <button

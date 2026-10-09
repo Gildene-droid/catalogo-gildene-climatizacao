@@ -4,17 +4,7 @@ import greeImg from './assets/images/gree_classic_split_1783633405785.jpg';
 import agrattoImg from './assets/images/agratto_zen_split_1783633429633.jpg';
 import mideaImg from './assets/images/midea_airvolution_split_1783633417497.jpg';
 
-// Helper to determine recommended area based on BTU
-function getRecommendedArea(btu: number): string {
-  if (btu <= 9000) return 'Até 15 m²';
-  if (btu <= 12000) return 'Até 20 m²';
-  if (btu <= 18000) return 'Até 30 m²';
-  if (btu <= 24000) return 'Até 40 m²';
-  if (btu <= 30000) return 'Até 50 m²';
-  if (btu <= 36000) return 'Até 60 m²';
-  if (btu <= 48000) return 'Até 80 m²';
-  return 'Acima de 80 m²';
-}
+import { getRecommendedArea } from './btuSizing';
 
 // Helper to determine estimated monthly consumption
 function getEnergyConsumption(btu: number, tech: string): string {
@@ -36,7 +26,7 @@ const BRAND_CONFIGS: Record<string, {
   'Midea': {
     name: 'Midea',
     series: 'AirVolution',
-    warranty: '2 anos (10 anos compressor)',
+    warranty: '1 ano de garantia',
     hasWifiDefault: true,
     officialImg: mideaImg,
     pdfUrl: 'https://midea.com.br/manuals/midea_airvolution_spec.pdf'
@@ -44,49 +34,49 @@ const BRAND_CONFIGS: Record<string, {
   'Springer Carrier': {
     name: 'Springer Carrier',
     series: 'Xtreme Save',
-    warranty: '2 anos total',
+    warranty: '1 ano de garantia',
     hasWifiDefault: true,
     pdfUrl: 'https://springercarrier.com.br/manuals/xtreme_save_spec.pdf'
   },
   'Carrier': {
     name: 'Carrier',
     series: 'XPower Inverter',
-    warranty: '2 anos total',
+    warranty: '1 ano de garantia',
     hasWifiDefault: true,
     pdfUrl: 'https://carrier.com.br/manuals/xpower_inverter.pdf'
   },
   'LG': {
     name: 'LG',
     series: 'Dual Inverter Voice',
-    warranty: '10 anos (Compressor Dual Inverter)',
+    warranty: '1 ano de garantia',
     hasWifiDefault: true,
     pdfUrl: 'https://lg.com.br/manuals/lg_dual_inverter_voice.pdf'
   },
   'Samsung': {
     name: 'Samsung',
     series: 'WindFree Connect',
-    warranty: '10 anos (Compressor Digital Inverter)',
+    warranty: '1 ano de garantia',
     hasWifiDefault: true,
     pdfUrl: 'https://samsung.com.br/manuals/windfree_connect.pdf'
   },
   'Daikin': {
     name: 'Daikin',
     series: 'R-32 Eco Inverter',
-    warranty: '2 anos (10 anos compressor)',
+    warranty: '1 ano de garantia',
     hasWifiDefault: false,
     pdfUrl: 'https://daikin.com.br/manuals/daikin_r32_eco.pdf'
   },
   'Fujitsu': {
     name: 'Fujitsu',
     series: 'Airstage Inverter',
-    warranty: '5 anos credenciado',
+    warranty: '1 ano de garantia',
     hasWifiDefault: false,
     pdfUrl: 'https://fujitsu.com.br/manuals/airstage_inverter.pdf'
   },
   'Gree': {
     name: 'Gree',
     series: 'G-Classic',
-    warranty: '5 anos autorizada',
+    warranty: '1 ano de garantia',
     hasWifiDefault: true,
     officialImg: greeImg,
     pdfUrl: 'https://gree.com.br/manuals/gree_gclassic.pdf'
@@ -94,28 +84,28 @@ const BRAND_CONFIGS: Record<string, {
   'Elgin': {
     name: 'Elgin',
     series: 'Eco Dream',
-    warranty: '3 anos total',
+    warranty: '1 ano de garantia',
     hasWifiDefault: true,
     pdfUrl: 'https://elgin.com.br/manuals/elgin_eco_dream.pdf'
   },
   'Hisense': {
     name: 'Hisense',
     series: 'Hi-Smart Wi-Fi',
-    warranty: '2 anos (10 anos compressor)',
+    warranty: '1 ano de garantia',
     hasWifiDefault: true,
     pdfUrl: 'https://hisense.com.br/manuals/hisense_hismart.pdf'
   },
   'TCL': {
     name: 'TCL',
     series: 'Gentle Breeze',
-    warranty: '2 anos (10 anos compressor)',
+    warranty: '1 ano de garantia',
     hasWifiDefault: true,
     pdfUrl: 'https://tcl.com.br/manuals/tcl_gentle_breeze.pdf'
   },
   'Agratto': {
     name: 'Agratto',
     series: 'Zen Inverter',
-    warranty: '1 ano total',
+    warranty: '1 ano de garantia',
     hasWifiDefault: false,
     officialImg: agrattoImg,
     pdfUrl: 'https://agratto.com.br/manuals/agratto_zen.pdf'
@@ -123,14 +113,14 @@ const BRAND_CONFIGS: Record<string, {
   'Philco': {
     name: 'Philco',
     series: 'Eco Inverter',
-    warranty: '1 ano (10 anos compressor)',
+    warranty: '1 ano de garantia',
     hasWifiDefault: true,
     pdfUrl: 'https://philco.com.br/manuals/philco_eco_inverter.pdf'
   },
   'Electrolux': {
     name: 'Electrolux',
     series: 'Color Adapt',
-    warranty: '1 ano (10 anos compressor)',
+    warranty: '1 ano de garantia',
     hasWifiDefault: true,
     officialImg: electroluxImg,
     pdfUrl: 'https://electrolux.com.br/manuals/electrolux_color_adapt.pdf'
