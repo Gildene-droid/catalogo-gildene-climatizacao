@@ -11,7 +11,7 @@ export function applyVerifiedModel(product: Product): Product {
     warrantyDetails: '3 meses legais mais 21 meses contratuais, com instalação por empresa credenciada ou técnico certificado Midea Carrier, uso conforme manual e nota fiscal. Prazo adicional específico do compressor não confirmado nesta ficha. Consulta em 09/10/2026.',
     description: 'Split Hi Wall Midea AI AirVolution Inverter, ciclo Frio, 220V, fluido R-32 e conectividade Wi-Fi. Consulte disponibilidade, preço e dimensionamento antes de comprar.',
     features: ['Tecnologia Inverter', 'Fluido R-32', 'Conectividade Wi-Fi', 'Garantia condicionada à instalação e ao certificado'],
-    specs: {'Evaporadora':evaporator,'Condensadora':condenser,'Capacidade':`${product.capacityBTU.toLocaleString('pt-BR')} BTU/h`,'Ciclo':'Frio','Tensão':'220V','Fluido refrigerante':'R-32','Garantia do aparelho':warranty,'Garantia adicional do compressor':'Não confirmada nesta ficha'},
+    specs: {'Evaporadora':evaporator,'Condensadora':condenser,'Capacidade':`${product.capacityBTU.toLocaleString('pt-BR')} BTU/h`,'Ciclo':'Frio','Tensão':'220V','Fluido refrigerante':'R-32','Garantia do aparelho':warranty,'Garantia adicional do compressor':'Confirmar com o consultor de vendas'},
     energyConsumption:undefined, hasWifi:true, rating:0, reviewsCount:0,
   };
 }

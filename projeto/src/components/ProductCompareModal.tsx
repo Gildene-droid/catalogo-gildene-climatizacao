@@ -164,7 +164,7 @@ export default function ProductCompareModal({
                     </div>
 
                     <div className="h-10 flex items-center justify-center border-b border-slate-200/60 font-semibold text-slate-600">
-                      {prod.warranty || 'Consulte a garantia deste modelo'}
+                      {prod.warranty || 'Confirmar com o consultor de vendas'}
                     </div>
 
                     <div className="h-12 flex flex-col items-center justify-center border-b border-slate-200/60">

@@ -185,7 +185,7 @@ export default function ProductDetailView({
           <div className="rounded-2xl border border-emerald-100 bg-emerald-50 p-4 text-sm text-slate-700 space-y-2">
             <h2 className="font-bold text-slate-900">Garantia: aparelho e compressor</h2>
             <p>{product.warrantyDetails || getWarrantyPolicy(product.brand).summary}</p>
-            <p className="text-xs">O prazo deste cadastro depende da confirmação do código do fabricante, data da compra e certificado. Confira antes de comprar. Políticas consultadas em 09/10/2026.</p>
+            <p className="text-xs">Informações não confirmadas: confirmar com o consultor de vendas. As condições de garantia dependem do certificado do modelo.</p>
             <div className="flex flex-wrap gap-3">{product.warrantySource && <a href={product.warrantySource} target="_blank" rel="noopener noreferrer" className="text-sky-700 underline text-xs">Ficha deste modelo — Leveros</a>}{getWarrantyPolicy(product.brand).sources.map(source => <a key={source.url} href={source.url} target="_blank" rel="noopener noreferrer" className="text-sky-700 underline text-xs">{source.label}</a>)}</div>
           </div>
 
@@ -199,7 +199,7 @@ export default function ProductDetailView({
             <div className="bg-slate-50 border border-slate-100 rounded-2xl p-3 text-center">
               <ShieldCheck className="w-4 h-4 text-emerald-500 mx-auto mb-1" />
               <span className="text-[10px] text-slate-400 font-bold uppercase block">Garantia</span>
-              <span className="text-xs font-black text-slate-800">{product.warranty || 'Consulte a garantia deste modelo'}</span>
+              <span className="text-xs font-black text-slate-800">{product.warranty || 'Confirmar com o consultor de vendas'}</span>
             </div>
             <div className="bg-slate-50 border border-slate-100 rounded-2xl p-3 text-center">
               <Truck className="w-4 h-4 text-sky-500 mx-auto mb-1" />

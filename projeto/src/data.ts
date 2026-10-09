@@ -813,7 +813,16 @@ export const PRODUCTS: Product[] = [
     specs: Object.fromEntries(Object.entries(product.specs).map(([key, value]) => [key, removeDual(value)])),
     ...(product.warranty ? { warranty: removeDual(product.warranty) } : {}),
   }));
-}).map(applyVerifiedModel).filter((product, index, products) => !product.warrantySource || products.findIndex(other => other.sku === product.sku) === index);
+ }).map(applyVerifiedModel).map(product => product.warrantySource ? product : {
+  ...product,
+  description: 'Confirmar com o consultor de vendas',
+  features: ['Confirmar com o consultor de vendas'],
+  specs: Object.fromEntries(Object.keys(product.specs).map(key => [key, 'Confirmar com o consultor de vendas'])),
+  procelBadge: 'Confirmar com o consultor de vendas',
+  energyConsumption: 'Confirmar com o consultor de vendas',
+  energyRating: undefined,
+  hasWifi: undefined,
+}).filter((product, index, products) => !product.warrantySource || products.findIndex(other => other.sku === product.sku) === index);
 
 export const MOCK_CEPS: { [key: string]: { logradouro: string; bairro: string; cidade: string; uf: string } } = {
   '01311-000': { logradouro: 'Avenida Paulista', bairro: 'Bela Vista', cidade: 'São Paulo', uf: 'SP' },

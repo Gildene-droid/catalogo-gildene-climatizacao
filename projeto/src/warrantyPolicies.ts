@@ -20,10 +20,10 @@ for (const brand of ['Springer Carrier', 'Carrier', 'Hitachi']) {
   warrantyPolicies[brand] = { summary: 'Consulte o prazo do aparelho e do compressor no certificado do modelo. Não há prazo específico confirmado para este cadastro. Informe o código da evaporadora e da condensadora para conferir as condições de instalação e cobertura.', sources: [] };
 }
 export function getWarrantyPolicy(brand: string): Policy {
-  return warrantyPolicies[brand] || { summary: 'Consulte a garantia deste modelo, conforme certificado do fabricante.', sources: [] };
+  return warrantyPolicies[brand] || { summary: 'Confirmar com o consultor de vendas, conforme certificado do fabricante.', sources: [] };
 }
 export function applyWarrantyPolicy(product: Product): Product {
-  const warranty = 'Consulte a garantia deste modelo';
+  const warranty = 'Confirmar com o consultor de vendas';
   const clean = (text: string) => text.replace(/com\s+\d+\s+anos?\s+de\s+garantia/gi, 'com garantia conforme certificado');
   return {...product, warranty, description: clean(product.description), features: product.features.map(clean), specs: Object.fromEntries(Object.entries(product.specs).map(([key,value]) => [key, /garantia/i.test(key) ? warranty : clean(value)]))};
 }
