@@ -1,3 +1,4 @@
+import { applyWarrantyPolicy, getWarrantyPolicy } from './warrantyPolicies';
 import { getRecommendedArea } from './btuSizing';
 import { Product, UpsellItem, BrandInfo } from './types';
 import { generateFullCatalog } from './productsCatalogGenerator';
@@ -798,11 +799,11 @@ export const PRODUCTS: Product[] = [
   };
 
   if (product.brand === 'LG' && product.category === 'Split Hi Wall') {
-    return applyProductPhoto(product);
+    return applyWarrantyPolicy(applyProductPhoto(product));
   }
 
   const removeDual = (text: string) => text.replace(/\bdual\s+/gi, '');
-  return applyProductPhoto({
+  return applyWarrantyPolicy(applyProductPhoto({
     ...product,
     name: removeDual(product.name),
     technology: product.technology === 'Dual Inverter' ? 'Inverter' : product.technology,
@@ -810,7 +811,7 @@ export const PRODUCTS: Product[] = [
     features: product.features.map(removeDual),
     specs: Object.fromEntries(Object.entries(product.specs).map(([key, value]) => [key, removeDual(value)])),
     ...(product.warranty ? { warranty: removeDual(product.warranty) } : {}),
-  });
+  }));
 });
 
 export const MOCK_CEPS: { [key: string]: { logradouro: string; bairro: string; cidade: string; uf: string } } = {

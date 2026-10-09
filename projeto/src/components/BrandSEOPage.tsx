@@ -1,3 +1,4 @@
+import { getWarrantyPolicy } from '../warrantyPolicies';
 import React from 'react';
 import { BRANDS_DATA, PRODUCTS } from '../data';
 import { Product } from '../types';
@@ -85,7 +86,7 @@ export const BrandSEOPage: React.FC<BrandSEOPageProps> = ({ brandId, onSelectPro
             </a>
             <div className="flex items-center gap-2 text-xs font-bold text-sky-300 bg-sky-900/40 px-4 py-3 rounded-2xl border border-sky-800/50">
               <Shield className="w-4 h-4 text-sky-400" />
-              <span>{brandInfo.warrantyInfo}</span>
+              <span>{getWarrantyPolicy(brandInfo.name).summary}</span>
             </div>
           </div>
         </div>

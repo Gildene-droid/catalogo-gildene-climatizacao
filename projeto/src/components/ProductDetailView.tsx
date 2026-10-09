@@ -1,3 +1,4 @@
+import { getWarrantyPolicy } from '../warrantyPolicies';
 import React, { useState } from 'react';
 import { Star, Truck, Heart, ArrowLeft, ShoppingCart, Check, FileText, Settings, Award, ZoomIn, X, MessageCircle, Download, ShieldCheck, Zap } from 'lucide-react';
 import { Product, UpsellItem } from '../types';
@@ -181,6 +182,13 @@ export default function ProductDetailView({
             ))}
           </div>
 
+          <div className="rounded-2xl border border-emerald-100 bg-emerald-50 p-4 text-sm text-slate-700 space-y-2">
+            <h2 className="font-bold text-slate-900">Garantia: aparelho e compressor</h2>
+            <p>{getWarrantyPolicy(product.brand).summary}</p>
+            <p className="text-xs">O prazo deste cadastro depende da confirmação do código do fabricante, data da compra e certificado. Confira antes de comprar. Políticas consultadas em 09/10/2026.</p>
+            <div className="flex flex-wrap gap-3">{getWarrantyPolicy(product.brand).sources.map(source => <a key={source.url} href={source.url} target="_blank" rel="noopener noreferrer" className="text-sky-700 underline text-xs">{source.label}</a>)}</div>
+          </div>
+
           {/* Fast Highlights Badges */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2">
             <div className="bg-slate-50 border border-slate-100 rounded-2xl p-3 text-center">
@@ -191,7 +199,7 @@ export default function ProductDetailView({
             <div className="bg-slate-50 border border-slate-100 rounded-2xl p-3 text-center">
               <ShieldCheck className="w-4 h-4 text-emerald-500 mx-auto mb-1" />
               <span className="text-[10px] text-slate-400 font-bold uppercase block">Garantia</span>
-              <span className="text-xs font-black text-slate-800">{product.warranty || '1 ano de garantia'}</span>
+              <span className="text-xs font-black text-slate-800">{product.warranty || 'Consulte a garantia deste modelo'}</span>
             </div>
             <div className="bg-slate-50 border border-slate-100 rounded-2xl p-3 text-center">
               <Truck className="w-4 h-4 text-sky-500 mx-auto mb-1" />
