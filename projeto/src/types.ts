@@ -49,6 +49,8 @@ export interface Product {
   recommendedArea?: string; // e.g. 'Até 15 m²'
   energyConsumption?: string; // e.g. '15,8 kWh/mês'
   warranty?: string; // e.g. '2 anos / 10 anos compressor'
+  warrantySource?: string;
+  warrantyDetails?: string;
   hasWifi?: boolean;
   pdfUrl?: string;
   energyRating?: 'A' | 'A+++' | 'B' | 'C';

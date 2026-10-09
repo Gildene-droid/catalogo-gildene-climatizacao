@@ -379,6 +379,7 @@ export default function App() {
         {currentView === 'home' && (
           <div className="space-y-16 pb-20 animate-fade-in" id="home-view">
             
+            <div role="status" className="bg-amber-50 text-amber-900 px-4 py-3 text-sm text-center">Catálogo em revisão. Confirme modelo, especificações, disponibilidade e garantia no orçamento antes da compra.</div>
             {/* 1. HERO BANNER SECTION (Full Background Image with Gildene Consultant) */}
             <section className="overflow-hidden bg-slate-50 border-b border-slate-200">
               <h1 className="sr-only">GouveClima — Soluções em Climatização</h1>

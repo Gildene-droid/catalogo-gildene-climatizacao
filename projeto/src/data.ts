@@ -1,4 +1,5 @@
 import { applyWarrantyPolicy, getWarrantyPolicy } from './warrantyPolicies';
+import { applyVerifiedModel } from './verifiedModels';
 import { getRecommendedArea } from './btuSizing';
 import { Product, UpsellItem, BrandInfo } from './types';
 import { generateFullCatalog } from './productsCatalogGenerator';
@@ -812,7 +813,7 @@ export const PRODUCTS: Product[] = [
     specs: Object.fromEntries(Object.entries(product.specs).map(([key, value]) => [key, removeDual(value)])),
     ...(product.warranty ? { warranty: removeDual(product.warranty) } : {}),
   }));
-});
+}).map(applyVerifiedModel).filter((product, index, products) => !product.warrantySource || products.findIndex(other => other.sku === product.sku) === index);
 
 export const MOCK_CEPS: { [key: string]: { logradouro: string; bairro: string; cidade: string; uf: string } } = {
   '01311-000': { logradouro: 'Avenida Paulista', bairro: 'Bela Vista', cidade: 'São Paulo', uf: 'SP' },
