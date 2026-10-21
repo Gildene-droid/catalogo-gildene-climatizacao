@@ -5,6 +5,7 @@ import test from 'node:test';
 
 function receiver() {
   const rows = [];
+  const cache = new Map();
   let fail = false;
   let locked = false;
   const sheet = {
@@ -20,7 +21,8 @@ function receiver() {
     ContentService: {createTextOutput: x=>x},
     LockService: {getScriptLock: () => ({waitLock: () => {locked=true;},releaseLock: () => {locked=false;}})},
     SpreadsheetApp: {openById: () => ({getSheetByName:()=>sheet}),flush:()=>{}},
-    Utilities: {formatDate: () => '21/10/2026 15:00:00'},
+    CacheService: {getScriptCache: () => ({get:key=>cache.get(key),put:(key,value)=>cache.set(key,value)})},
+    Utilities: {formatDate: () => '21/10/2026 15:00:00',DigestAlgorithm:{SHA_256:'sha256'},computeDigest:(_,text)=>text,base64EncodeWebSafe:text=>text},
     HtmlService: {XFrameOptionsMode:{ALLOWALL:'allow'},createHtmlOutput: html => ({setXFrameOptionsMode:()=>html})},
   });
   vm.runInContext(readFileSync(new URL('./Code.gs',import.meta.url),'utf8'),context);
@@ -47,4 +49,11 @@ test('spreadsheet failure returns failure and releases lock',()=>{
 test('spreadsheet formula injection is neutralized',()=>{
   const r=receiver();r.send({...lead,name:'=IMPORTXML("x")',details:'+SUM(1,2)'});
   assert.equal(r.rows[0][1],"'=IMPORTXML(\"x\")");assert.equal(r.rows[0][6],"'+SUM(1,2)");
+});
+
+test('limits repeated submissions from the same contact',()=>{
+  const r=receiver();
+  for(let i=0;i<10;i++) assert.match(r.send({...lead,requestId:`aaaaaaaa-aaaa-4aaa-8aaa-${String(i).padStart(12,'0')}`}),/"ok":true/);
+  assert.match(r.send({...lead,requestId:'bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb'}),/"ok":false/);
+  assert.equal(r.rows.length,10);
 });

@@ -33,6 +33,18 @@ function doPost(event) {
       const lastRow = sheet.getLastRow();
       const exists = lastRow > 1 && sheet.getRange(2,10,lastRow-1,1).createTextFinder(requestId).matchEntireCell(true).findNext();
       if (!exists) {
+        // Limit automated abuse; use a hash rather than personal data in cache keys.
+        const phoneKey = Utilities.base64EncodeWebSafe(Utilities.computeDigest(Utilities.DigestAlgorithm.SHA_256,data.phone.replace(/\D/g,'')));
+        const cache = CacheService.getScriptCache();
+        const minute = Utilities.formatDate(new Date(),'America/Sao_Paulo','yyyyMMddHHmm');
+        const hour = Utilities.formatDate(new Date(),'America/Sao_Paulo','yyyyMMddHH');
+        const globalKey = 'requests:' + minute;
+        const contactKey = 'contact:' + hour + ':' + phoneKey;
+        const globalCount = Number(cache.get(globalKey) || 0);
+        const contactCount = Number(cache.get(contactKey) || 0);
+        if (globalCount >= 30 || contactCount >= 10) throw new Error('Limite de cadastros');
+        cache.put(globalKey,String(globalCount+1),120);
+        cache.put(contactKey,String(contactCount+1),3600);
         // Do not let public submissions execute formulas in the owner's sheet.
         const safe = value => {
           const text = String(value || '').trim();
