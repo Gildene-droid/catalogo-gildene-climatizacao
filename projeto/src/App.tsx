@@ -1,3 +1,4 @@
+import ContactCapture from './components/ContactCapture';
 import React, { useState, useMemo } from 'react';
 import Header from './components/Header';
 import Footer from './components/Footer';
@@ -103,9 +104,6 @@ export default function App() {
 
   // Interactive consultancy modal/state
   const [showConsultantModal, setShowConsultantModal] = useState(false);
-  const [consultantName, setConsultantName] = useState('');
-  const [consultantPhone, setConsultantPhone] = useState('');
-  const [consultantSubmitted, setConsultantSubmitted] = useState(false);
 
   const [filters, setFilters] = useState<FilterState>({
     capacities: [],
@@ -319,19 +317,6 @@ export default function App() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const handleConsultantRequest = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (consultantName.trim() && consultantPhone.trim()) {
-      setConsultantSubmitted(true);
-      setTimeout(() => {
-        setConsultantSubmitted(false);
-        setShowConsultantModal(false);
-        setConsultantName('');
-        setConsultantPhone('');
-        alert('Consultor agendado! Entraremos em contato via WhatsApp nas próximas horas.');
-      }, 1200);
-    }
-  };
 
   return (
     <div className="min-h-screen bg-slate-50/50 text-slate-800 flex flex-col font-sans antialiased" id="app-root">
@@ -398,8 +383,8 @@ export default function App() {
                     {siteSettings.heroSubtitle}
                   </p>
 
-                  {/* Dual Action Buttons matching reference screenshot */}
-                  <div className="pt-2 flex flex-col sm:flex-row gap-3 sm:gap-4 items-stretch sm:items-center">
+                  {/* Primary actions share the same spacing, icon and button style. */}
+                  <div className="pt-2 flex flex-col sm:flex-row sm:flex-wrap gap-3 sm:gap-4 items-stretch sm:items-center">
                     
                     {/* Blue Button: COMPRAR AGORA */}
                     <button
@@ -438,6 +423,24 @@ export default function App() {
                         </div>
                       </div>
                     </a>
+
+                    <button
+                      type="button"
+                      onClick={() => setShowConsultantModal(true)}
+                      aria-haspopup="dialog"
+                      aria-controls="consultant-modal"
+                      className="flex-1 sm:flex-none bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white p-3.5 sm:p-4 rounded-2xl shadow-lg shadow-blue-600/20 transition-all cursor-pointer flex items-center justify-between gap-3 text-left"
+                    >
+                      <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center shrink-0">
+                          <Users className="w-5 h-5 text-white" />
+                        </div>
+                        <div>
+                          <span className="text-xs font-black uppercase tracking-wider block leading-none">Cadastre-se</span>
+                          <span className="text-[11px] font-medium text-blue-100 mt-1 block leading-none">Solicite seu atendimento</span>
+                        </div>
+                      </div>
+                    </button>
 
                   </div>
 
@@ -1020,61 +1023,21 @@ export default function App() {
 
       {/* Consultant Schedule Modal */}
       {showConsultantModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4" id="consultant-modal">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4" id="consultant-modal" role="dialog" aria-modal="true" aria-labelledby="registration-title">
           <div className="absolute inset-0 bg-slate-950/70 backdrop-blur-sm" onClick={() => setShowConsultantModal(false)} />
           
-          <div className="bg-white rounded-3xl border border-slate-100 p-6 sm:p-8 max-w-md w-full relative z-10 shadow-2xl space-y-6 animate-scale">
+          <div className="bg-white rounded-3xl border border-slate-100 p-6 sm:p-8 max-w-md w-full max-h-[90vh] overflow-y-auto relative z-10 shadow-2xl space-y-6 animate-scale">
             <div className="text-center space-y-2">
               <div className="w-12 h-12 rounded-2xl bg-sky-100 text-sky-600 flex items-center justify-center mx-auto">
                 <MessageCircle className="w-6 h-6" />
               </div>
-              <h3 className="text-xl font-extrabold text-slate-900 tracking-tight">Falar com Consultor Especializado</h3>
+              <h3 id="registration-title" className="text-xl font-extrabold text-slate-900 tracking-tight">Cadastro de clientes</h3>
               <p className="text-xs text-slate-500 leading-normal max-w-xs mx-auto font-medium">
                 Insira seu contato abaixo. Um consultor de GouveClima entrará em contato via WhatsApp.
               </p>
             </div>
 
-            <form onSubmit={handleConsultantRequest} className="space-y-4">
-              <div>
-                <label className="text-[11px] font-black text-slate-400 uppercase block mb-1">Seu Nome</label>
-                <input
-                  type="text"
-                  required
-                  placeholder="Seu nome completo"
-                  value={consultantName}
-                  onChange={(e) => setConsultantName(e.target.value)}
-                  className="w-full px-4 py-2.5 border border-slate-200 rounded-xl bg-slate-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-sky-500/20 text-slate-800 text-xs font-medium"
-                />
-              </div>
-
-              <div>
-                <label className="text-[11px] font-black text-slate-400 uppercase block mb-1">Celular / WhatsApp</label>
-                <input
-                  type="tel"
-                  required
-                  placeholder="(61) 98110-8374"
-                  value={consultantPhone}
-                  onChange={(e) => setConsultantPhone(e.target.value)}
-                  className="w-full px-4 py-2.5 border border-slate-200 rounded-xl bg-slate-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-sky-500/20 text-slate-800 text-xs font-mono font-medium"
-                />
-              </div>
-
-              <div className="flex gap-3 pt-2">
-                <button
-                  type="button"
-                  onClick={() => setShowConsultantModal(false)}
-                  className="flex-1 py-3 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold rounded-xl transition-all"
-                >
-                  Cancelar
-                </button>
-                <button
-                  type="submit"
-                  className="flex-1 py-3 bg-sky-600 hover:bg-sky-500 text-white text-xs font-extrabold rounded-xl transition-all shadow-md uppercase tracking-wider"
-                >
-                  Solicitar Contato
-                </button>
-              </div>
-            </form>
+            <ContactCapture onClose={() => setShowConsultantModal(false)} />
           </div>
         </div>
       )}

@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import {leadsEnabled, saveLead, validateLead} from '../leadCapture';
+import React, { useEffect, useRef, useState } from 'react';
 import { MessageSquare, Mail, CheckCircle2, ShieldCheck, ArrowLeft, Trash2, FileText, Building, MapPin, Phone, User, Send } from 'lucide-react';
 import { CartItem } from '../types';
 
@@ -46,6 +47,11 @@ export default function CheckoutView({
     );
   };
 
+  const [saveState, setSaveState] = useState<'idle' | 'saving' | 'saved' | 'error'>('idle');
+  const [saveError, setSaveError] = useState('');
+  const [leadRequest, setLeadRequest] = useState({snapshot: '', id: crypto.randomUUID()});
+  const pending = useRef(false);
+  useEffect(() => {setSaveState('idle');setSaveError('');}, [nome, telefone, whatsapp, email, cidade, estado, selectedServices, observacoes, empresa, cnpj, personType, cart]);
   const [orderSent, setOrderSent] = useState(false);
   const [generatedWhatsAppUrl, setGeneratedWhatsAppUrl] = useState('');
   const [generatedEmailUrl, setGeneratedEmailUrl] = useState('');
@@ -125,6 +131,32 @@ Data: ${new Date().toLocaleDateString('pt-BR')} às ${new Date().toLocaleTimeStr
 ====================================================`;
   };
 
+  const persistRegistration = async () => {
+    if (pending.current) return;
+    const lead = {name: nome, phone: whatsapp || telefone, email, city: `${cidade} / ${estado}`,
+      interest: selectedServices.join(', ') || 'Orçamento de equipamentos',
+      details: buildEmailMessage(), source: 'Orçamento do site'};
+    const invalid = validateLead(lead);
+    if (invalid || !cidade.trim() || cart.length === 0) {
+      setSaveError(invalid || 'Preencha a cidade e escolha os produtos para seu orçamento.');
+      return;
+    }
+    const snapshot = JSON.stringify(lead);
+    const id = leadRequest.snapshot === snapshot ? leadRequest.id : crypto.randomUUID();
+    setLeadRequest({snapshot, id});
+    pending.current = true;
+    setSaveState('saving'); setSaveError('');
+    try {await saveLead(lead, id);setSaveState('saved');}
+    catch (e) {setSaveState('error');setSaveError(e instanceof Error ? e.message : 'Falha ao salvar cadastro.');}
+    finally {pending.current = false;}
+  };
+  const registrationStatus = <div className="space-y-2" aria-live="polite">
+    {saveState === 'saving' && <p className="text-sm text-slate-600">Enviando cadastro…</p>}
+    {saveState === 'saved' && <p className="text-sm text-emerald-700">Cadastro recebido pela GouveClima.</p>}
+    {saveError && <p role="alert" className="text-sm text-red-700">{saveError}</p>}
+    {saveState === 'error' && <button type="button" onClick={persistRegistration} className="text-sm underline">Tentar salvar novamente</button>}
+  </div>;
+
   const handleSendWhatsApp = (e?: React.FormEvent) => {
     if (e) e.preventDefault();
 
@@ -152,6 +184,7 @@ Data: ${new Date().toLocaleDateString('pt-BR')} às ${new Date().toLocaleTimeStr
     setOrderSent(true);
 
     window.open(waUrl, '_blank', 'noopener,noreferrer');
+    if (leadsEnabled()) void persistRegistration();
   };
 
   const handleSendEmail = (e?: React.FormEvent) => {
@@ -181,6 +214,7 @@ Data: ${new Date().toLocaleDateString('pt-BR')} às ${new Date().toLocaleTimeStr
     setOrderSent(true);
 
     window.location.href = mailUrl;
+    if (leadsEnabled()) void persistRegistration();
   };
 
   if (orderSent) {
@@ -192,16 +226,18 @@ Data: ${new Date().toLocaleDateString('pt-BR')} às ${new Date().toLocaleTimeStr
         
         <div className="space-y-3">
           <span className="px-3.5 py-1 bg-emerald-50 text-emerald-700 font-extrabold text-xs rounded-full uppercase tracking-wider border border-emerald-100">
-            Solicitação Enviada
+            Solicitação de orçamento
           </span>
           <h2 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
-            Recebemos sua solicitação!
+            {saveState === 'saved' ? 'Cadastro recebido!' : 'Conclua o envio da solicitação'}
           </h2>
           <p className="text-slate-700 max-w-xl mx-auto text-sm sm:text-base font-semibold leading-relaxed bg-sky-50 p-4 rounded-2xl border border-sky-100">
-            Recebemos sua solicitação! Em breve um especialista da GouveClima — Soluções em Climatização entrará em contato com a melhor condição comercial para sua região.
+            Confirme o envio no WhatsApp ou no aplicativo de e-mail. Você também pode salvar seu cadastro para solicitar o retorno da GouveClima.
           </p>
         </div>
 
+        {registrationStatus}
+        {leadsEnabled() && saveState !== 'saved' && <button type="button" disabled={saveState === 'saving'} onClick={persistRegistration} className="rounded-xl bg-sky-600 px-6 py-3 font-bold text-white disabled:opacity-50">Salvar cadastro e solicitar retorno</button>}
         {/* Resumo da mensagem */}
         <div className="bg-slate-50 border border-slate-200/80 rounded-3xl p-6 text-left space-y-4 max-w-xl mx-auto text-xs text-slate-700 shadow-sm">
           <div className="flex items-center justify-between border-b border-slate-200 pb-3">
@@ -313,6 +349,7 @@ Data: ${new Date().toLocaleDateString('pt-BR')} às ${new Date().toLocaleTimeStr
           </div>
 
           <form className="space-y-4">
+            <fieldset disabled={saveState === 'saving'} className="space-y-4">
             
             {/* Tipo de Pessoa (PF / PJ) */}
             <div className="space-y-1.5">
@@ -528,6 +565,9 @@ Data: ${new Date().toLocaleDateString('pt-BR')} às ${new Date().toLocaleTimeStr
               />
             </div>
 
+            <p className="text-xs text-slate-500">Ao solicitar atendimento, seus dados serão enviados à GouveClima para orçamento e contato.</p>
+            {registrationStatus}
+            {leadsEnabled() && <button type="button" onClick={persistRegistration} disabled={saveState === 'saving' || cart.length === 0} className="w-full rounded-xl bg-sky-600 p-3 text-sm font-bold text-white disabled:opacity-50">{saveState === 'saving' ? 'Enviando…' : 'Salvar cadastro e solicitar retorno'}</button>}
             {/* ENVIO BUTTONS */}
             <div className="pt-4 border-t border-slate-100 space-y-3">
               <button
@@ -567,6 +607,7 @@ Data: ${new Date().toLocaleDateString('pt-BR')} às ${new Date().toLocaleTimeStr
               </p>
             </div>
 
+            </fieldset>
           </form>
         </div>
 
