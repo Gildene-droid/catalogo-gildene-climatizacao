@@ -1,4 +1,5 @@
 import { Product } from './types';
+import additionalPhotos from './additionalProductPhotos.json';
 
 // Product photos retrieved from Leveros and CentralAr. Match by model line and variant.
 const photos = [
@@ -191,14 +192,22 @@ const photos = [
   }
 ];
 
+/** Photos are references to the same brand and equipment type, never cross-category fallbacks. */
 export function applyProductPhoto(product: Product): Product {
-  const photo = photos.find(p => p.id === product.id) || photos.find(p =>
+  const exact = photos.find(p => p.id === product.id) || photos.find(p =>
     p.series && product.name.toLowerCase().includes(p.series.toLowerCase()) &&
     p.brand === product.brand && p.category === product.category &&
-    p.capacityBTU === product.capacityBTU && p.cycle === product.cycle && p.technology === product.technology) ||
-    photos.find(p => p.id === 'midea-12k-airvolution' && product.brand === 'Midea' &&
-      product.category === 'Split Hi Wall' && product.name.toLowerCase().includes('airvolution') &&
-      product.technology === 'Inverter');
+    p.capacityBTU === product.capacityBTU && p.cycle === product.cycle && p.technology === product.technology);
+  const isInverter = (technology: string) => technology === 'Inverter' || technology === 'Dual Inverter';
+  const candidates = [...photos, ...additionalPhotos].filter(p =>
+    p.brand === product.brand && p.category === product.category &&
+    (p.technology === product.technology || (isInverter(p.technology) && isInverter(product.technology))));
+  const family = candidates.find(p => 'series' in p && p.series &&
+    product.name.toLowerCase().includes(p.series.toLowerCase()));
+  const photo = exact || family || candidates[0];
   const image = photo ? `${import.meta.env.BASE_URL}${photo.image}` : '';
-  return {...product, image, gallery: image ? [image] : []};
+  return {...product, image, gallery: image ? [image] : [],
+    imageSourceTitle: photo?.sourceTitle,
+    imageSourceUrl: photo?.page,
+    imageIsReference: Boolean(photo && !exact)};
 }

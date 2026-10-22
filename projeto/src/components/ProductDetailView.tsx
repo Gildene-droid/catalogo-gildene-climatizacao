@@ -134,7 +134,7 @@ export default function ProductDetailView({
           <div className="aspect-[4/3] w-full bg-slate-50 border border-slate-100 rounded-3xl overflow-hidden relative group flex items-center justify-center p-6 shadow-sm">
             <ProductImage
               src={selectedImage}
-              alt={product.name}
+              alt={product.imageSourceTitle || product.name}
               containerClassName="w-full h-full"
             />
             {product.technology && (
@@ -162,6 +162,8 @@ export default function ProductDetailView({
               Foto de referência da linha
             </div>
           </div>
+
+          {product.image && product.imageSourceTitle && <p className="text-xs text-slate-500">Imagem de referência: {product.imageSourceTitle}. Confirme o modelo e a versão no orçamento.</p>}
 
           {/* Gallery Thumbnails */}
           <div className="grid grid-cols-4 gap-3">

@@ -68,7 +68,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
       >
         <ProductImage
           src={product.image}
-          alt={product.name}
+          alt={product.imageSourceTitle || product.name}
           containerClassName="w-full h-full"
         />
         
@@ -81,7 +81,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
         </span>
       </div>
 
-      <p className="text-[10px] text-slate-400 mb-2">Foto de referência. Confirme a versão no orçamento.</p>
+      <p className="text-[10px] text-slate-400 mb-2" title={product.imageSourceTitle}>{product.image ? (product.imageIsReference ? 'Foto ilustrativa da marca e categoria. Modelo e versão a confirmar.' : 'Foto de referência. Confirme a versão no orçamento.') : 'Foto aguardando confirmação do modelo.'}</p>
       {/* Compare Toggle Pill */}
       {onToggleCompare && (
         <div className="mb-2">

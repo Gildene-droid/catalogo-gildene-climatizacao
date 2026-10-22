@@ -37,6 +37,9 @@ export interface Product {
   originalPrice: number;
   image: string;
   gallery: string[];
+  imageSourceTitle?: string;
+  imageSourceUrl?: string;
+  imageIsReference?: boolean;
   description: string;
   features: string[];
   specs: {
